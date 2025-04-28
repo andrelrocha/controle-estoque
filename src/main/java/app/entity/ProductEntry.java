@@ -21,7 +21,7 @@ import cronapp.framework.core.persistence.*;
 @jakarta.persistence.Entity
 @jakarta.persistence.Table(name = "\"PRODUCTENTRY\"")
 @XmlRootElement
-@CronappSecurity
+@CronappSecurity(post = "Funcionario", get = "Funcionario", delete = "Funcionario", put = "Funcionario")
 @JsonFilter("app.entity.ProductEntry")
 @CronappTable(role=CronappTableRole.ASSOCIATION_CLASS)
 public class ProductEntry implements Serializable {

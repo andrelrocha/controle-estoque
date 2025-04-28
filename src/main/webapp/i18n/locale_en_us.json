@@ -188,5 +188,9 @@
   "Amount": "Amount",
   "Funcionario": "Employee",
   "EntradaProdutos": "Products Entry",
-  "SaidaProdutos": "Products Exit"
+  "SaidaProdutos": "Products Exit",
+  "ProductEntry": "Product Entry",
+  "ProductExit": "Products Exit",
+  "RegisteringUser": "Registering User",
+  "Product": "Product"
 }

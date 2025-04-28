@@ -1973,7 +1973,12 @@
       },
       "queries": [],
       "realName": "",
-      "restSecurity": null,
+      "restSecurity": {
+        "delete": "Funcionario",
+        "get": "Funcionario",
+        "post": "Funcionario",
+        "put": "Funcionario"
+      },
       "role": "AssociationClass",
       "runtimeClass": "cronos.widgets.joint.uml.Class",
       "size": {
@@ -2245,7 +2250,12 @@
       },
       "queries": [],
       "realName": "",
-      "restSecurity": null,
+      "restSecurity": {
+        "delete": "Funcionario",
+        "get": "Funcionario",
+        "post": "Funcionario",
+        "put": "Funcionario"
+      },
       "role": "AssociationClass",
       "runtimeClass": "cronos.widgets.joint.uml.Class",
       "size": {
@@ -5376,31 +5386,10 @@
       ],
       "groupPositions": [
         {
-          "idCell": "2016ad54-a0f9-4337-ad10-694a48f0435c",
-          "position": {
-            "x": 684,
-            "y": 26
-          }
-        },
-        {
-          "idCell": "56d9e678-741d-41e6-9b24-bccc58de1598",
-          "position": {
-            "x": 1106,
-            "y": 406
-          }
-        },
-        {
           "idCell": "fabe0aea-c05d-44a4-a87c-2e2c0a97e994",
           "position": {
             "x": 382,
             "y": 36
-          }
-        },
-        {
-          "idCell": "dcc00b32-aa33-47bd-bc4d-91da88f25cbc",
-          "position": {
-            "x": 656,
-            "y": 312
           }
         },
         {
@@ -5411,17 +5400,10 @@
           }
         },
         {
-          "idCell": "36b875ac-204a-4346-82e4-aabbd2c6b202",
+          "idCell": "d92238a3-a37d-4cc6-a543-d0687dc207cd",
           "position": {
-            "x": 940,
-            "y": 594
-          }
-        },
-        {
-          "idCell": "e35a650f-29ee-4683-8c1c-5cc61a955ddf",
-          "position": {
-            "x": 668,
-            "y": 594
+            "x": 100,
+            "y": 34
           }
         },
         {
@@ -5432,10 +5414,17 @@
           }
         },
         {
-          "idCell": "d92238a3-a37d-4cc6-a543-d0687dc207cd",
+          "idCell": "2b76b50a-bb57-4354-a653-b71b1450ebff",
           "position": {
-            "x": 100,
-            "y": 34
+            "x": 144,
+            "y": 530
+          }
+        },
+        {
+          "idCell": "56d9e678-741d-41e6-9b24-bccc58de1598",
+          "position": {
+            "x": 1106,
+            "y": 406
           }
         },
         {
@@ -5446,24 +5435,17 @@
           }
         },
         {
-          "idCell": "fbe4a477-8332-4235-a9a2-5db4a56fa3d0",
-          "position": {
-            "x": 984,
-            "y": 38
-          }
-        },
-        {
-          "idCell": "347b3a52-34de-4814-9dd1-bb86c25a0b60",
-          "position": {
-            "x": 1570,
-            "y": 288
-          }
-        },
-        {
           "idCell": "6677bebc-8341-4669-94a4-4d27dad77399",
           "position": {
             "x": 1348,
             "y": 288
+          }
+        },
+        {
+          "idCell": "fbe4a477-8332-4235-a9a2-5db4a56fa3d0",
+          "position": {
+            "x": 984,
+            "y": 38
           }
         },
         {
@@ -5474,10 +5456,38 @@
           }
         },
         {
-          "idCell": "2b76b50a-bb57-4354-a653-b71b1450ebff",
+          "idCell": "347b3a52-34de-4814-9dd1-bb86c25a0b60",
           "position": {
-            "x": 144,
-            "y": 530
+            "x": 1570,
+            "y": 288
+          }
+        },
+        {
+          "idCell": "36b875ac-204a-4346-82e4-aabbd2c6b202",
+          "position": {
+            "x": 940,
+            "y": 594
+          }
+        },
+        {
+          "idCell": "2016ad54-a0f9-4337-ad10-694a48f0435c",
+          "position": {
+            "x": 684,
+            "y": 26
+          }
+        },
+        {
+          "idCell": "dcc00b32-aa33-47bd-bc4d-91da88f25cbc",
+          "position": {
+            "x": 656,
+            "y": 312
+          }
+        },
+        {
+          "idCell": "e35a650f-29ee-4683-8c1c-5cc61a955ddf",
+          "position": {
+            "x": 668,
+            "y": 594
           }
         }
       ]

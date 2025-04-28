@@ -188,5 +188,9 @@
   "Amount": "Quantidade",
   "Funcionario": "Funcionário",
   "EntradaProdutos": "Entrada Produtos",
-  "SaidaProdutos": "Saída Produtos"
+  "SaidaProdutos": "Saída Produtos",
+  "ProductEntry": "Entrada de Produtos",
+  "ProductExit": "Saída de Produtos",
+  "RegisteringUser": "Autor do Registro",
+  "Product": "Produto"
 }
