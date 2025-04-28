@@ -189,8 +189,14 @@
   "Funcionario": "Funcionário",
   "EntradaProdutos": "Entrada Produtos",
   "SaidaProdutos": "Saída Produtos",
-  "ProductEntry": "Entrada de Produtos",
+  "ProductEntry": "Entrada de Produto ",
   "ProductExit": "Saída de Produtos",
   "RegisteringUser": "Autor do Registro",
-  "Product": "Produto"
+  "Product": "Produto",
+  "HEADER": "",
+  "": "",
+  "Fechar": "Fechar",
+  "Salvar": "Salvar",
+  "Create": "",
+  "Criar": "Criar"
 }

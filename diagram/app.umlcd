@@ -67,7 +67,7 @@
         "height": 0,
         "width": 0
       },
-      "sqlDebugging": true,
+      "sqlDebugging": false,
       "type": "basic.Rect",
       "visionLikePackage": false,
       "z": 1
@@ -3770,7 +3770,7 @@
       "requireds": [],
       "restSecurity": {
         "delete": "Administrators",
-        "get": "Administrators",
+        "get": "Administrators;Funcionario",
         "post": "Administrators",
         "put": "Administrators"
       },
@@ -5393,52 +5393,10 @@
           }
         },
         {
-          "idCell": "b194a533-61d6-4661-b9da-ff80ce2835f9",
-          "position": {
-            "x": 70,
-            "y": 240
-          }
-        },
-        {
-          "idCell": "d92238a3-a37d-4cc6-a543-d0687dc207cd",
-          "position": {
-            "x": 100,
-            "y": 34
-          }
-        },
-        {
-          "idCell": "4cbe47fe-4f4b-43e9-960b-4b5cc2633aef",
-          "position": {
-            "x": 404,
-            "y": 342
-          }
-        },
-        {
-          "idCell": "2b76b50a-bb57-4354-a653-b71b1450ebff",
-          "position": {
-            "x": 144,
-            "y": 530
-          }
-        },
-        {
           "idCell": "56d9e678-741d-41e6-9b24-bccc58de1598",
           "position": {
             "x": 1106,
             "y": 406
-          }
-        },
-        {
-          "idCell": "53b97115-f8a3-4221-9ce6-bad2672b8bd5",
-          "position": {
-            "x": 418,
-            "y": 594
-          }
-        },
-        {
-          "idCell": "6677bebc-8341-4669-94a4-4d27dad77399",
-          "position": {
-            "x": 1348,
-            "y": 288
           }
         },
         {
@@ -5449,23 +5407,16 @@
           }
         },
         {
-          "idCell": "0bf80138-477a-4420-8097-d6c9b2f545b5",
+          "idCell": "b194a533-61d6-4661-b9da-ff80ce2835f9",
           "position": {
-            "x": 1452,
-            "y": 54
+            "x": 70,
+            "y": 240
           }
         },
         {
-          "idCell": "347b3a52-34de-4814-9dd1-bb86c25a0b60",
+          "idCell": "53b97115-f8a3-4221-9ce6-bad2672b8bd5",
           "position": {
-            "x": 1570,
-            "y": 288
-          }
-        },
-        {
-          "idCell": "36b875ac-204a-4346-82e4-aabbd2c6b202",
-          "position": {
-            "x": 940,
+            "x": 418,
             "y": 594
           }
         },
@@ -5484,10 +5435,59 @@
           }
         },
         {
+          "idCell": "347b3a52-34de-4814-9dd1-bb86c25a0b60",
+          "position": {
+            "x": 1570,
+            "y": 288
+          }
+        },
+        {
+          "idCell": "d92238a3-a37d-4cc6-a543-d0687dc207cd",
+          "position": {
+            "x": 100,
+            "y": 34
+          }
+        },
+        {
+          "idCell": "36b875ac-204a-4346-82e4-aabbd2c6b202",
+          "position": {
+            "x": 940,
+            "y": 594
+          }
+        },
+        {
+          "idCell": "6677bebc-8341-4669-94a4-4d27dad77399",
+          "position": {
+            "x": 1348,
+            "y": 288
+          }
+        },
+        {
+          "idCell": "4cbe47fe-4f4b-43e9-960b-4b5cc2633aef",
+          "position": {
+            "x": 404,
+            "y": 342
+          }
+        },
+        {
+          "idCell": "0bf80138-477a-4420-8097-d6c9b2f545b5",
+          "position": {
+            "x": 1452,
+            "y": 54
+          }
+        },
+        {
           "idCell": "e35a650f-29ee-4683-8c1c-5cc61a955ddf",
           "position": {
             "x": 668,
             "y": 594
+          }
+        },
+        {
+          "idCell": "2b76b50a-bb57-4354-a653-b71b1450ebff",
+          "position": {
+            "x": 144,
+            "y": 530
           }
         }
       ]
