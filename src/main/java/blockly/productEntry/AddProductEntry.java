@@ -3,6 +3,7 @@ package blockly.productEntry;
 import cronapi.*;
 import cronapi.rest.security.CronappSecurity;
 import java.util.concurrent.Callable;
+import org.springframework.web.bind.annotation.*;
 
 
 @CronapiMetaData(type = "blockly")
@@ -13,77 +14,40 @@ public static final int TIMEOUT = 300;
 
 /**
  *
+ * @param data
+ *
  * @author Andre Lucio Rocha Wanderley
- * @since 28/04/2025, 17:09:41
+ * @since 28/04/2025, 18:56:59
  *
  */
-public static Var buildObject() throws Exception {
+public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
  return new Callable<Var>() {
 
+   private Var user = Var.VAR_NULL;
+   private Var product = Var.VAR_NULL;
+   private Var productEntryOnDB = Var.VAR_NULL;
    private Var e = Var.VAR_NULL;
-   private Var addProductEntryData = Var.VAR_NULL;
 
    public Var call() throws Exception {
     try {
-         addProductEntryData =
-        cronapi.json.Operations.createObjectJson();
-        if (
-        cronapi.logic.Operations.isNullOrEmpty(
-        cronapi.screen.Operations.getValueOfField(
-        Var.valueOf("ProductEntry.active.product"))).getObjectAsBoolean()) {
-            cronapi.util.Operations.throwException(
-            cronapi.util.Operations.createException(
-            Var.valueOf("Você deve selecionar um produto.")));
-        } else {
-            cronapi.json.Operations.setJsonOrMapField(addProductEntryData,
-            Var.valueOf("product_id"),
-            cronapi.screen.Operations.getValueOfField(
-            Var.valueOf("ProductEntry.active.product")));
-        }
-        if (
-        cronapi.logic.Operations.isNullOrEmpty(
-        cronapi.screen.Operations.getValueOfField(
-        Var.valueOf("ProductEntry.active.amount"))).getObjectAsBoolean()) {
-            cronapi.util.Operations.throwException(
-            cronapi.util.Operations.createException(
-            Var.valueOf("Você deve indicar a quantidade que está sendo adicionada do produto.")));
-        } else {
-            cronapi.json.Operations.setJsonOrMapField(addProductEntryData,
-            Var.valueOf("amount"),
-            cronapi.screen.Operations.getValueOfField(
-            Var.valueOf("ProductEntry.active.amount")));
-        }
+         user =
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.user.GetLoggedUser:getEntity"));
+        product =
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.GetProduct:getEntity"), Var.valueOf("cbd6ae39",
+        cronapi.json.Operations.getJsonOrMapField(data,
+        Var.valueOf("product_id"))));
+        productEntryOnDB =
+        cronapi.database.Operations.insert(Var.valueOf("app.entity.ProductEntry"),Var.valueOf("amount",
+        cronapi.json.Operations.getJsonOrMapField(data,
+        Var.valueOf("amount"))),Var.valueOf("date",
+        cronapi.dateTime.Operations.getNow()),Var.valueOf("product",product),Var.valueOf("registeringUser",user));
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.UpdateProduct:updateAmountAfterEntry"), Var.valueOf("63c5ce49", product), Var.valueOf("49cb6752",
+        cronapi.json.Operations.getJsonOrMapField(data,
+        Var.valueOf("amount"))));
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
-         cronapi.util.Operations.throwException(e);
-     }
-    return addProductEntryData;
-   }
- }.call();
-}
-
-/**
- *
- * @author Andre Lucio Rocha Wanderley
- * @since 28/04/2025, 17:09:41
- *
- */
-public static Var save() throws Exception {
- return new Callable<Var>() {
-
-   private Var data = Var.VAR_NULL;
-   private Var e = Var.VAR_NULL;
-   private Var errorMessage = Var.VAR_NULL;
-
-   public Var call() throws Exception {
-    try {
-         data =
-        Var.valueOf(buildObject());
-     } catch (Exception e_exception) {
-          e = Var.valueOf(e_exception);
-         errorMessage =
-        cronapi.util.Operations.getExceptionMessage(e);
-        cronapi.util.Operations.callClientFunction( Var.valueOf("cronapi.screen.notify"), Var.valueOf("error"), errorMessage);
+         cronapi.util.Operations.throwException(
+        cronapi.util.Operations.getExceptionMessage(e));
      }
     return Var.VAR_NULL;
    }
