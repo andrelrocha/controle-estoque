@@ -21,6 +21,8 @@
         <class>app.entity.ProductEntry</class>
         <properties>
             <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
             <property name="cronapp.diagram.namespace" value="app"/>
         </properties>
     </persistence-unit>

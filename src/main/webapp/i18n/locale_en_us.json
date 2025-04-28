@@ -185,5 +185,8 @@
   "Quantidade": "Amount",
   "Nome": "Name",
   "Produtos": "Products",
-  "Amount": "Amount"
+  "Amount": "Amount",
+  "Funcionario": "Employee",
+  "EntradaProdutos": "Products Entry",
+  "SaidaProdutos": "Products Exit"
 }

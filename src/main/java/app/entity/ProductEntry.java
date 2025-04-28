@@ -44,9 +44,9 @@ public class ProductEntry implements Serializable {
     * @generated
     */
     @ManyToOne
-    @JoinColumn(name="user", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
+    @JoinColumn(name="registeringUser", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
         
-        private User user;
+        private User registeringUser;
 
 
     /**
@@ -103,21 +103,21 @@ public class ProductEntry implements Serializable {
         return this;
     }
     /**
-    * Obtém user
-    * return user
+    * Obtém registeringUser
+    * return registeringUser
     * @generated
     */
-    public User getUser() {
-        return this.user;
+    public User getRegisteringUser() {
+        return this.registeringUser;
     }
 
     /**
-    * Define user
-    * @param user user
+    * Define registeringUser
+    * @param registeringUser registeringUser
     * @generated
     */
-    public ProductEntry setUser(User user) {
-        this.user = user;
+    public ProductEntry setRegisteringUser(User registeringUser) {
+        this.registeringUser = registeringUser;
         return this;
     }
     /**

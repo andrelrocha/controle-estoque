@@ -19,7 +19,6 @@ import cronapp.framework.core.persistence.*;
 * @generated
 */
 @jakarta.persistence.Entity
-@IdClass(ProductExitPK.class)
 @jakarta.persistence.Table(name = "\"PRODUCTEXIT\"")
 @XmlRootElement
 @CronappSecurity
@@ -40,22 +39,23 @@ public class ProductExit implements Serializable {
     @Column(name = "id", nullable = false, insertable=true, updatable=true)
         private java.lang.String id = UUID.randomUUID().toString().toUpperCase();
 
+
     /**
     * @generated
     */
-    @Id
-    @JoinColumn(name="product", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
-        private Product product;
+    @ManyToOne
+    @JoinColumn(name="registeringUser", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
+        
+        private User registeringUser;
 
 
     /**
     * @generated
     */
     @ManyToOne
-    @JoinColumn(name="user", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
+    @JoinColumn(name="product", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
         
-        private User user;
-
+        private Product product;
 
 
     /**
@@ -103,21 +103,21 @@ public class ProductExit implements Serializable {
         return this;
     }
     /**
-    * Obtém user
-    * return user
+    * Obtém registeringUser
+    * return registeringUser
     * @generated
     */
-    public User getUser() {
-        return this.user;
+    public User getRegisteringUser() {
+        return this.registeringUser;
     }
 
     /**
-    * Define user
-    * @param user user
+    * Define registeringUser
+    * @param registeringUser registeringUser
     * @generated
     */
-    public ProductExit setUser(User user) {
-        this.user = user;
+    public ProductExit setRegisteringUser(User registeringUser) {
+        this.registeringUser = registeringUser;
         return this;
     }
     /**
@@ -184,7 +184,6 @@ public class ProductExit implements Serializable {
         if (obj == null || getClass() != obj.getClass()) return false;
 ProductExit object = (ProductExit)obj;
         if (id != null ? !id.equals(object.id) : object.id != null) return false;
-        if (product != null ? !product.equals(object.product) : object.product != null) return false;
         return true;
     }
 
@@ -195,7 +194,6 @@ ProductExit object = (ProductExit)obj;
     public int hashCode() {
         int result = 1;
         result = 31 * result + ((id == null) ? 0 : id.hashCode());
-        result = 31 * result + ((product == null) ? 0 : product.hashCode());
         return result;
     }
 

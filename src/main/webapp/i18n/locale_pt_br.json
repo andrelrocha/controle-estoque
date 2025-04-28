@@ -185,5 +185,8 @@
   "Quantidade": "Quantidade",
   "Nome": "Nome",
   "Produtos": "Produtos",
-  "Amount": "Quantidade"
+  "Amount": "Quantidade",
+  "Funcionario": "Funcionário",
+  "EntradaProdutos": "Entrada Produtos",
+  "SaidaProdutos": "Saída Produtos"
 }
