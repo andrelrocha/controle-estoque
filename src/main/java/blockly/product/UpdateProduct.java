@@ -18,7 +18,7 @@ public static final int TIMEOUT = 300;
  * @param entryAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 29/04/2025, 13:52:40
+ * @since 29/04/2025, 13:55:44
  *
  */
 public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "entryAmount", id = "49cb6752") Var entryAmount) throws Exception {
@@ -66,7 +66,7 @@ public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 29/04/2025, 13:52:40
+ * @since 29/04/2025, 13:55:44
  *
  */
 public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -105,7 +105,7 @@ public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id
  * @param exitAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 29/04/2025, 13:52:40
+ * @since 29/04/2025, 13:55:44
  *
  */
 public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "exitAmount", id = "49cb6752") Var exitAmount) throws Exception {
@@ -165,6 +165,45 @@ public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_
         cronapi.util.Operations.throwException(e);
      }
     return Consulta_a_Entidades;
+   }
+ }.call();
+}
+
+/**
+ *
+ * @param id
+ * @param deletedAmount
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 29/04/2025, 13:55:44
+ *
+ */
+public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
+ return new Callable<Var>() {
+
+   private Var e = Var.VAR_NULL;
+   private Var productOldAmount = Var.VAR_NULL;
+   private Var productNewAmount = Var.VAR_NULL;
+
+   public Var call() throws Exception {
+    try {
+         if (
+        cronapi.logic.Operations.isNullOrEmpty(id2).getObjectAsBoolean()) {
+            cronapi.util.Operations.throwException(
+            cronapi.util.Operations.createException(
+            Var.valueOf("Não foi recebido ID válido para a atualização da quantidade do produto selecionado.")));
+        }
+        productOldAmount =
+        cronapi.list.Operations.getFirst((
+        cronapi.database.Operations.query(Var.valueOf("app.entity.Product"),Var.valueOf("select \n	p.amount \nfrom \n	Product p  \nwhere \n	p.id = :id"),Var.valueOf("id",id2))));
+        productNewAmount =
+        cronapi.math.Operations.sum(productOldAmount,deletedAmount);
+        cronapi.database.Operations.execute(Var.valueOf("app.entity.Product"), Var.valueOf("update \n	Product  \nset \n	amount = :amount \nwhere \n	id = :id"),Var.valueOf("amount",productNewAmount),Var.valueOf("id",id2));
+     } catch (Exception e_exception) {
+          e = Var.valueOf(e_exception);
+         cronapi.util.Operations.throwException(e);
+     }
+    return Var.VAR_NULL;
    }
  }.call();
 }
