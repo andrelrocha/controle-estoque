@@ -11,7 +11,7 @@ window.blockly.js.blockly.productEntry.ModalHandler = window.blockly.js.blockly.
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 28/04/2025, 15:40:08
+ * @since 29/04/2025, 09:55:10
  *
  */
 window.blockly.js.blockly.productEntry.ModalHandler.openAddModalArgs = [];
@@ -28,16 +28,16 @@ window.blockly.js.blockly.productEntry.ModalHandler.openAddModal = async functio
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 28/04/2025, 15:40:08
+ * @since 29/04/2025, 09:55:10
  *
  */
 window.blockly.js.blockly.productEntry.ModalHandler.closeAddModalArgs = [];
 window.blockly.js.blockly.productEntry.ModalHandler.closeAddModal = async function() {
 
   //
-  this.cronapi.screen.changeValueOfField("ProductEntry.active.amount", '');
+  this.cronapi.screen.changeValueOfField("vars.modalAddProductId", '');
   //
-  this.cronapi.screen.changeValueOfField("ProductEntry.active.product", '');
+  this.cronapi.screen.changeValueOfField("vars.modalAddAmount", '');
   //
   this.cronapi.screen.hideModal("modalAddProductEntry");
 }

@@ -1,21 +1,21 @@
 window.blockly = window.blockly || {};
 window.blockly.js = window.blockly.js || {};
 window.blockly.js.blockly = window.blockly.js.blockly || {};
-window.blockly.js.blockly.productEntry = window.blockly.js.blockly.productEntry || {};
-window.blockly.js.blockly.productEntry.BuildObject = window.blockly.js.blockly.productEntry.BuildObject || {};
+window.blockly.js.blockly.productExit = window.blockly.js.blockly.productExit || {};
+window.blockly.js.blockly.productExit.BuildObject = window.blockly.js.blockly.productExit.BuildObject || {};
 
 /**
- * @function buildAddProjectEntry
+ * @function buildAddProjectExit
  *
  *
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 29/04/2025, 09:54:47
+ * @since 29/04/2025, 09:57:12
  *
  */
-window.blockly.js.blockly.productEntry.BuildObject.buildAddProjectEntryArgs = [];
-window.blockly.js.blockly.productEntry.BuildObject.buildAddProjectEntry = async function() {
+window.blockly.js.blockly.productExit.BuildObject.buildAddProjectExitArgs = [];
+window.blockly.js.blockly.productExit.BuildObject.buildAddProjectExit = async function() {
  var data, e;
   //
   try {
@@ -32,7 +32,7 @@ window.blockly.js.blockly.productEntry.BuildObject.buildAddProjectEntry = async 
     //
     if (this.cronapi.logic.isNullOrEmpty(this.cronapi.screen.getValueOfField("vars.modalAddAmount"))) {
       //
-      this.cronapi.util.throwException(this.cronapi.util.createException('Você deve indicar a quantidade que está sendo adicionada do produto.'));
+      this.cronapi.util.throwException(this.cronapi.util.createException('Você deve indicar a quantidade que está sendo removida do produto.'));
     } else {
       //
       this.cronapi.json.setProperty(data, 'amount', this.cronapi.screen.getValueOfField("vars.modalAddAmount"));

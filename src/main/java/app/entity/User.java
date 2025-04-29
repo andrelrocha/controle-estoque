@@ -22,7 +22,7 @@ import cronapp.framework.core.persistence.*;
 @jakarta.persistence.Entity
 @jakarta.persistence.Table(name = "\"USER\"")
 @XmlRootElement
-@CronappSecurity(post = "Administrators", get = "Administrators;Funcionario", delete = "Administrators", put = "Administrators")
+@CronappSecurity(post = "Administrators", get = "Administrators", delete = "Administrators", put = "Administrators")
 @JsonFilter("app.entity.User")
 @CronappTable(role=CronappTableRole.CLASS)
 public class User implements Serializable {

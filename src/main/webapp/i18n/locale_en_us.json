@@ -198,5 +198,7 @@
   "Fechar": "Close",
   "Salvar": "Save",
   "Create": "",
-  "Criar": "Create"
+  "Criar": "Create",
+  "ProductEntryAdd": "Product Entry - Adding",
+  "ProductExitAdd": "Product Exit - Adding"
 }
