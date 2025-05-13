@@ -18,7 +18,7 @@ public static final int TIMEOUT = 300;
  * @param entryAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 13/05/2025, 10:28:03
+ * @since 13/05/2025, 14:31:33
  *
  */
 public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "entryAmount", id = "49cb6752") Var entryAmount) throws Exception {
@@ -66,7 +66,7 @@ public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 13/05/2025, 10:28:03
+ * @since 13/05/2025, 14:31:33
  *
  */
 public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -105,7 +105,7 @@ public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id
  * @param exitAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 13/05/2025, 10:28:03
+ * @since 13/05/2025, 14:31:33
  *
  */
 public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "exitAmount", id = "49cb6752") Var exitAmount) throws Exception {
@@ -175,7 +175,7 @@ public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 13/05/2025, 10:28:03
+ * @since 13/05/2025, 14:31:33
  *
  */
 public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {

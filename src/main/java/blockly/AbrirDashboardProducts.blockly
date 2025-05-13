@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><blockly audit="false" blocklyType="JAVA" bpmnAble="false" formTarget="" functionCategory="" linkHelp="" multilayer="false" resourceType="JAVA" ruleDescription="AbrirDashboardProducts" ruleName="AbrirDashboardProducts" ruleSynchronous="false" ruleTimeout="" ruleType="I" showAsFunction="false" soap="false" swagger="false">
+  <metadata scale="1" scrollx="477.1999999999996" scrolly="-77.29999999999967" target="Anb:u5+^,0vLkL9QIqn5"/>
+  <block asynccall="false" colour="#995ba5" datasourcetype="" id="Anb:u5+^,0vLkL9QIqn5" origintype="procedures_defreturn" output="false" score="9007199254740991" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" valueconstant="" x="-350" y="130">
+    <field customattributes="" name="NAME">openDashboard</field>
+    <statement name="STACK">
+      <block asynccall="false" colour="#487f7f" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="tU3M8sCV1N3~V9X~;JkT" multilayer="true" namespace="cronapi.util.openDashboard" origintype="procedures_opendashboard_callnoreturn" output="false" returntype="ObjectType.VOID" score="9007199254740991" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EAbrir%20dashboard%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20respons%C3%A1vel%20por%20abrir%20um%20dashboard%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Dashboard%20:%20Texto%3C/span%3E%3Cbr%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20onclick=%22Blockly.Search.goToDoc('https://ide-next.cronapp.io/help?type=blockly&amp;amp;id=cronapi.util.openDashboard','cronapi.util.openDashboard')%22%20href=%22javascript:void(0)%22%3EAjuda%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_opendashboard_callnoreturn" valueconstant="">
+        <mutation name="{{cronapi.util.openDashboard}}" return-raw-type="undefined">
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.STRING" name="Dashboard"/>
+        </mutation>
+        <value name="ARG0">
+          <block asynccall="false" colour="#487f7f" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="0Ra}3D|.v?Q3j`DYOy;K" origintype="util_dashboard_list" output="true" score="9007199254740991" type="util_dashboard_list" valueconstant="">
+            <mutation>
+              <arg name="dashboards/produtos-estoque_copy.dashboard" value="dashboards/produtos-estoque_copy.dashboard"/>
+              <arg name="dashboards/produtos-estoque.dashboard" value="dashboards/produtos-estoque.dashboard"/>
+            </mutation>
+            <field customattributes="" name="SELECT">dashboards/produtos-estoque.dashboard</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+</blockly>

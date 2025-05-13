@@ -203,5 +203,6 @@
   "ProductExitAdd": "Product Exit - Adding",
   "GerarRelatorio": "Open Report",
   "AbrirRelatorio": "Open Report",
-  "Abrir Relatorio": "Open Report"
+  "Abrir Relatorio": "Open Report",
+  "ExibirEstoque": "Open Inventory"
 }
