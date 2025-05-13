@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 09/05/2025, 17:34:06
+ * @since 13/05/2025, 10:33:28
  *
  */
 public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
@@ -59,8 +59,10 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
          System.out.println(
         Var.valueOf("ERRO FOI CHAMADO ").getObjectAsString());
         System.out.println(
-        cronapi.util.Operations.getExceptionMessage(e).getObjectAsString());
-        cronapi.util.Operations.throwException(e);
+        Var.valueOf("ERRO FOI CHAMADO ").getObjectAsString());
+        cronapi.util.Operations.throwException(
+        cronapi.util.Operations.createException(
+        cronapi.util.Operations.getExceptionMessage(e)));
      }
     return Var.VAR_NULL;
    }

@@ -200,5 +200,8 @@
   "Create": "A",
   "Criar": "Criar",
   "ProductEntryAdd": "Entrada de Produto - Adicionando",
-  "ProductExitAdd": "Saída de Produto - Adicionando"
+  "ProductExitAdd": "Saída de Produto - Adicionando",
+  "GerarRelatorio": "Abrir Relatório",
+  "AbrirRelatorio": "Abrir Relatório",
+  "Abrir Relatorio": "Abrir Relatório"
 }
