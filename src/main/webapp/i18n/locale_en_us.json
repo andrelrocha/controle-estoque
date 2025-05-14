@@ -204,5 +204,7 @@
   "GerarRelatorio": "Open Report",
   "AbrirRelatorio": "Open Report",
   "Abrir Relatorio": "Open Report",
-  "ExibirEstoque": "Open Inventory"
+  "ExibirEstoque": "Open Inventory",
+  "MinQuantity": "Minimum Quantity",
+  "MaxQuantity": "Maximum Quantity"
 }

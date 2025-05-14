@@ -204,5 +204,7 @@
   "GerarRelatorio": "Abrir Relatório",
   "AbrirRelatorio": "Abrir Relatório",
   "Abrir Relatorio": "Abrir Relatório",
-  "ExibirEstoque": "Exibir Estoque"
+  "ExibirEstoque": "Exibir Estoque",
+  "MinQuantity": "Quantidade Mínima",
+  "MaxQuantity": "Quantidade Máxima"
 }

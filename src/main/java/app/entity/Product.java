@@ -52,10 +52,28 @@ public class Product implements Serializable {
     /**
     * @generated
     */
-    @CronappColumn(attributeType="INTEGER", label="Amount")
+    @CronappColumn(attributeType="LONG", label="Amount")
     @Column(name = "amount", nullable = true, unique = false, insertable=true, updatable=true)
         
-        private java.lang.Integer amount;
+        private java.lang.Long amount;
+
+
+    /**
+    * @generated
+    */
+    @CronappColumn(attributeType="INTEGER", label="Min Quantity")
+    @Column(name = "minQuantity", nullable = true, unique = false, insertable=true, updatable=true)
+        
+        private java.lang.Integer minQuantity;
+
+
+    /**
+    * @generated
+    */
+    @CronappColumn(attributeType="LONG", label="Max Quantity")
+    @Column(name = "maxQuantity", nullable = true, unique = false, insertable=true, updatable=true)
+        
+        private java.lang.Long maxQuantity;
 
 
     /**
@@ -106,7 +124,7 @@ public class Product implements Serializable {
     * return amount
     * @generated
     */
-    public java.lang.Integer getAmount() {
+    public java.lang.Long getAmount() {
         return this.amount;
     }
 
@@ -115,8 +133,44 @@ public class Product implements Serializable {
     * @param amount amount
     * @generated
     */
-    public Product setAmount(java.lang.Integer amount) {
+    public Product setAmount(java.lang.Long amount) {
         this.amount = amount;
+        return this;
+    }
+    /**
+    * Obtém minQuantity
+    * return minQuantity
+    * @generated
+    */
+    public java.lang.Integer getMinQuantity() {
+        return this.minQuantity;
+    }
+
+    /**
+    * Define minQuantity
+    * @param minQuantity minQuantity
+    * @generated
+    */
+    public Product setMinQuantity(java.lang.Integer minQuantity) {
+        this.minQuantity = minQuantity;
+        return this;
+    }
+    /**
+    * Obtém maxQuantity
+    * return maxQuantity
+    * @generated
+    */
+    public java.lang.Long getMaxQuantity() {
+        return this.maxQuantity;
+    }
+
+    /**
+    * Define maxQuantity
+    * @param maxQuantity maxQuantity
+    * @generated
+    */
+    public Product setMaxQuantity(java.lang.Long maxQuantity) {
+        this.maxQuantity = maxQuantity;
         return this;
     }
 
