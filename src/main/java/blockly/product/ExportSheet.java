@@ -15,7 +15,7 @@ public static final int TIMEOUT = 300;
 /**
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 16/05/2025, 10:00:18
+ * @since 16/05/2025, 11:58:39
  *
  */
 public static Var exportCsv() throws Exception {
@@ -39,7 +39,9 @@ public static Var exportCsv() throws Exception {
         cronapi.database.Operations.query(Var.valueOf("app.entity.Product"),Var.valueOf("select \n	p \nfrom \n	Product p"));
         file2 =
         cronapi.io.Operations.fileOpenToWrite(filePath,
-        Var.valueOf("id,name,amount,maxQuantity, minQuantity\n"));
+        Var.valueOf(
+        Var.valueOf("id,name,amount,minQuantity,maxQuantity").getObjectAsString() +
+        cronapi.text.Operations.newline().getObjectAsString()));
         for (Iterator it_p = products.iterator(); it_p.hasNext();) {
             p = Var.valueOf(it_p.next());
             cronapi.io.Operations.fileAppend(file2,
@@ -58,7 +60,7 @@ public static Var exportCsv() throws Exception {
             Var.valueOf(",").getObjectAsString() +
             cronapi.json.Operations.getJsonOrMapField(p,
             Var.valueOf("minQuantity")).getObjectAsString() +
-            Var.valueOf("\n").getObjectAsString()));
+            cronapi.text.Operations.newline().getObjectAsString()));
         } // end for
         cronapi.io.Operations.fileClose(file2);
         cronapi.io.Operations.startDownload(filePath,
