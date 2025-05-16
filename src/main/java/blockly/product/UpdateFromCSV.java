@@ -18,7 +18,7 @@ public static final int TIMEOUT = 300;
  * @param productsList
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 16/05/2025, 11:44:06
+ * @since 16/05/2025, 12:28:40
  *
  */
 public static Var manage(@ParamMetaData(description = "productsList", id = "cd44578b") @RequestBody(required = false) Var productsList) throws Exception {
