@@ -212,5 +212,7 @@
   "UploadArquivo": "Upload de Planilha",
   "Excel": "",
   "Download": "",
-  "DownloadCSV": "Download CSV"
+  "DownloadCSV": "Download CSV",
+  "UploadCSV": "Upload CSV",
+  "Upload CSV": "Upload CSV"
 }

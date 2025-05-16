@@ -211,5 +211,7 @@
   "Upload": "Upload",
   "UploadArquivo": "Sheet Upload",
   "Excel": "",
-  "DownloadCSV": "Download CSV"
+  "DownloadCSV": "Download CSV",
+  "UploadCSV": "Upload CSV",
+  "Upload CSV": "Upload CSV"
 }

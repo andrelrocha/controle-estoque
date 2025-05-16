@@ -14,29 +14,117 @@ public static final int TIMEOUT = 300;
 
 /**
  *
- * @param file
+ * @param fileData
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 15/05/2025, 16:22:02
+ * @since 16/05/2025, 11:19:45
  *
  */
-public static Var convert(@ParamMetaData(description = "file2", id = "ba10b34b") @RequestBody(required = false) Var file2) throws Exception {
+public static Var convertFromCsv(@ParamMetaData(description = "fileData", id = "ba10b34b") @RequestBody(required = false) Var fileData) throws Exception {
  return new Callable<Var>() {
 
+   private Var filePath = Var.VAR_NULL;
    private Var count = Var.VAR_NULL;
+   private Var file2 = Var.VAR_NULL;
+   private Var productsList = Var.VAR_NULL;
+   private Var listIndex = Var.VAR_NULL;
+   private Var line = Var.VAR_NULL;
+   private Var listGeneratedByLines = Var.VAR_NULL;
+   private Var product = Var.VAR_NULL;
    private Var e = Var.VAR_NULL;
 
    public Var call() throws Exception {
     try {
-         System.out.println(
-        Var.valueOf("chamou").getObjectAsString());
+         filePath =
+        Var.valueOf(
+        cronapi.io.Operations.fileAppReclycleDir().getObjectAsString() +
+        cronapi.io.Operations.fileSeparator().getObjectAsString() +
+        cronapi.json.Operations.getJsonOrMapField(fileData,
+        Var.valueOf("path")).getObjectAsString());
         count =
         Var.valueOf(1);
+        file2 =
+        cronapi.io.Operations.fileOpenToRead(filePath);
+        productsList =
+        cronapi.list.Operations.newListRepeat(
+        cronapi.json.Operations.createObjectJson(),(
+        cronapi.math.Operations.subtract(
+        cronapi.io.Operations.fileGetNumberOfLines(filePath),
+        Var.valueOf(1))));
+        listIndex =
+        Var.valueOf(1);
+        cronapi.io.Operations.readLine(file2, (sender_line) -> {
+            line = Var.valueOf(sender_line);
+            if (
+            Var.valueOf(
+            cronapi.logic.Operations.isNullOrEmpty(line)
+            .negate().getObjectAsBoolean() &&
+            Var.valueOf(!
+            Var.valueOf(1).equals(count)).getObjectAsBoolean()).getObjectAsBoolean()) {
+                listGeneratedByLines =
+                cronapi.list.Operations.getListFromText(line,
+                Var.valueOf(","));
+                if (
+                cronapi.logic.Operations.isNullOrEmpty(listGeneratedByLines)
+                .negate().getObjectAsBoolean()) {
+                    product =
+                    cronapi.database.Operations.newEntity(Var.valueOf("app.entity.Product"),Var.valueOf("id",
+                    cronapi.list.Operations.get(listGeneratedByLines,
+                    Var.valueOf(1))),Var.valueOf("name",
+                    cronapi.list.Operations.get(listGeneratedByLines,
+                    Var.valueOf(2))),Var.valueOf("amount",
+                    cronapi.list.Operations.get(listGeneratedByLines,
+                    Var.valueOf(3))),Var.valueOf("minQuantity",
+                    cronapi.list.Operations.get(listGeneratedByLines,
+                    Var.valueOf(5))),Var.valueOf("maxQuantity",
+                    cronapi.list.Operations.get(listGeneratedByLines,
+                    Var.valueOf(4))));
+                    cronapi.list.Operations.set(productsList,(listIndex),product);
+                }
+                listIndex =
+                cronapi.math.Operations.sum(listIndex,
+                Var.valueOf(1));
+            }
+            count =
+            cronapi.math.Operations.sum(count,
+            Var.valueOf(1));
+        });
+        cronapi.io.Operations.fileClose(file2);
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
          cronapi.util.Operations.throwException(
         cronapi.util.Operations.createException(
         Var.valueOf("Erro ao converter produtos da planilha.")));
+     }
+    return productsList;
+   }
+ }.call();
+}
+
+/**
+ *
+ * @param fileData
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 16/05/2025, 11:19:45
+ *
+ */
+public static Var handleProductsUpdateProcess(@ParamMetaData(description = "fileData", id = "3b1cb5b6") @RequestBody(required = false) Var fileData) throws Exception {
+ return new Callable<Var>() {
+
+   private Var productsList = Var.VAR_NULL;
+   private Var e = Var.VAR_NULL;
+   private Var response = Var.VAR_NULL;
+
+   public Var call() throws Exception {
+    try {
+         productsList =
+        Var.valueOf(convertFromCsv(fileData));
+        response =
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.UpdateFromCSV:manage"), Var.valueOf("cd44578b", productsList));
+     } catch (Exception e_exception) {
+          e = Var.valueOf(e_exception);
+         cronapi.util.Operations.throwException(e);
      }
     return Var.VAR_NULL;
    }

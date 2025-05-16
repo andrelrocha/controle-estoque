@@ -39,7 +39,7 @@ public static Var exportCsv() throws Exception {
         cronapi.database.Operations.query(Var.valueOf("app.entity.Product"),Var.valueOf("select \n	p \nfrom \n	Product p"));
         file2 =
         cronapi.io.Operations.fileOpenToWrite(filePath,
-        Var.valueOf("id,name,amount,minQuantity,maxQuantity\n"));
+        Var.valueOf("id,name,amount,maxQuantity, minQuantity\n"));
         for (Iterator it_p = products.iterator(); it_p.hasNext();) {
             p = Var.valueOf(it_p.next());
             cronapi.io.Operations.fileAppend(file2,
