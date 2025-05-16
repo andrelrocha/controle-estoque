@@ -1,0 +1,26 @@
+[
+  {
+    "gluonsoftId": "CBF965D2-96E4-4F13-BB5D-F2D442E3F62E",
+    "versionId": "27da078b-8b67-47e9-9a33-df3cab39ef12",
+    "name": "Excel",
+    "version": null,
+    "dateAdded": "2025-05-15 17:32:11",
+    "filesMerged": [
+      {
+        "name": "pom.xml",
+        "path": "/pom.xml",
+        "mavenDependecies": [
+          {
+            "artifactId": "cronapi-excel-plugin",
+            "classifier": null,
+            "groupId": "io.cronapp",
+            "scope": null,
+            "systemPath": null,
+            "type": null,
+            "version": "4.0.1"
+          }
+        ]
+      }
+    ]
+  }
+]

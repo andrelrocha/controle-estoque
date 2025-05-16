@@ -206,5 +206,12 @@
   "Abrir Relatorio": "Open Report",
   "ExibirEstoque": "Open Inventory",
   "MinQuantity": "Minimum Quantity",
-  "MaxQuantity": "Maximum Quantity"
+  "MaxQuantity": "Maximum Quantity",
+  "FazerOUpload": "",
+  "Upload": "Upload",
+  "UploadArquivo": "Sheet Upload",
+  "Excel": "",
+  "DownloadCSV": "Download CSV",
+  "UploadCSV": "Upload CSV",
+  "Upload CSV": "Upload CSV"
 }

@@ -206,5 +206,13 @@
   "Abrir Relatorio": "Abrir Relatório",
   "ExibirEstoque": "Exibir Estoque",
   "MinQuantity": "Quantidade Mínima",
-  "MaxQuantity": "Quantidade Máxima"
+  "MaxQuantity": "Quantidade Máxima",
+  "FazerOUpload": "",
+  "Upload": "Upload",
+  "UploadArquivo": "Upload de Planilha",
+  "Excel": "",
+  "Download": "",
+  "DownloadCSV": "Download CSV",
+  "UploadCSV": "Upload CSV",
+  "Upload CSV": "Upload CSV"
 }
