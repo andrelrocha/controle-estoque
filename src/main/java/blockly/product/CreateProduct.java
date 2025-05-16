@@ -18,7 +18,7 @@ public static final int TIMEOUT = 300;
  * @param product
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 16/05/2025, 12:07:04
+ * @since 16/05/2025, 12:28:19
  *
  */
 public static Var createFromJSON(@ParamMetaData(description = "product", id = "0822b2e3") @RequestBody(required = false) Var product) throws Exception {

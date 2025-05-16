@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param fileData
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 16/05/2025, 11:19:45
+ * @since 16/05/2025, 12:28:54
  *
  */
 public static Var convertFromCsv(@ParamMetaData(description = "fileData", id = "ba10b34b") @RequestBody(required = false) Var fileData) throws Exception {
@@ -106,7 +106,7 @@ public static Var convertFromCsv(@ParamMetaData(description = "fileData", id = "
  * @param fileData
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 16/05/2025, 11:19:45
+ * @since 16/05/2025, 12:28:54
  *
  */
 public static Var handleProductsUpdateProcess(@ParamMetaData(description = "fileData", id = "3b1cb5b6") @RequestBody(required = false) Var fileData) throws Exception {
