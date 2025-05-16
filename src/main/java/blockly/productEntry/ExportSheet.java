@@ -15,7 +15,7 @@ public static final int TIMEOUT = 300;
 /**
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 16/05/2025, 12:31:48
+ * @since 16/05/2025, 13:11:58
  *
  */
 public static Var exportCsv() throws Exception {
@@ -40,7 +40,7 @@ public static Var exportCsv() throws Exception {
         file2 =
         cronapi.io.Operations.fileOpenToWrite(filePath,
         Var.valueOf(
-        Var.valueOf("id,name,amount,minQuantity,maxQuantity").getObjectAsString() +
+        Var.valueOf("id,registeringUser,product,amount,date").getObjectAsString() +
         cronapi.text.Operations.newline().getObjectAsString()));
         for (Iterator it_p = productEntrys.iterator(); it_p.hasNext();) {
             p = Var.valueOf(it_p.next());
@@ -49,17 +49,21 @@ public static Var exportCsv() throws Exception {
             cronapi.json.Operations.getJsonOrMapField(p,
             Var.valueOf("id")).getObjectAsString() +
             Var.valueOf(",").getObjectAsString() +
+            cronapi.json.Operations.getJsonOrMapField(
             cronapi.json.Operations.getJsonOrMapField(p,
-            Var.valueOf("name")).getObjectAsString() +
+            Var.valueOf("registeringUser")),
+            Var.valueOf("id")).getObjectAsString() +
+            Var.valueOf(",").getObjectAsString() +
+            cronapi.json.Operations.getJsonOrMapField(
+            cronapi.json.Operations.getJsonOrMapField(p,
+            Var.valueOf("product")),
+            Var.valueOf("id")).getObjectAsString() +
             Var.valueOf(",").getObjectAsString() +
             cronapi.json.Operations.getJsonOrMapField(p,
             Var.valueOf("amount")).getObjectAsString() +
             Var.valueOf(",").getObjectAsString() +
             cronapi.json.Operations.getJsonOrMapField(p,
-            Var.valueOf("maxQuantity")).getObjectAsString() +
-            Var.valueOf(",").getObjectAsString() +
-            cronapi.json.Operations.getJsonOrMapField(p,
-            Var.valueOf("minQuantity")).getObjectAsString() +
+            Var.valueOf("date")).getObjectAsString() +
             cronapi.text.Operations.newline().getObjectAsString()));
         } // end for
         cronapi.io.Operations.fileClose(file2);
