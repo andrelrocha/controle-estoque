@@ -15,7 +15,7 @@ public static final int TIMEOUT = 300;
 /**
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 16/05/2025, 12:28:34
+ * @since 19/05/2025, 11:34:07
  *
  */
 public static Var exportCsv() throws Exception {
@@ -56,10 +56,10 @@ public static Var exportCsv() throws Exception {
             Var.valueOf("amount")).getObjectAsString() +
             Var.valueOf(",").getObjectAsString() +
             cronapi.json.Operations.getJsonOrMapField(p,
-            Var.valueOf("maxQuantity")).getObjectAsString() +
+            Var.valueOf("minQuantity")).getObjectAsString() +
             Var.valueOf(",").getObjectAsString() +
             cronapi.json.Operations.getJsonOrMapField(p,
-            Var.valueOf("minQuantity")).getObjectAsString() +
+            Var.valueOf("maxQuantity")).getObjectAsString() +
             cronapi.text.Operations.newline().getObjectAsString()));
         } // end for
         cronapi.io.Operations.fileClose(file2);
