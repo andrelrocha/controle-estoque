@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 19/05/2025, 14:46:32
+ * @since 19/05/2025, 14:50:35
  *
  */
 public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @RequestBody(required = false) Var data) throws Exception {
@@ -28,7 +28,10 @@ public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @
 
    public Var call() throws Exception {
     try {
-         productEntry =
+         System.out.println(
+        Var.valueOf("chamou para").getObjectAsString());
+        System.out.println(data.getObjectAsString());
+        productEntry =
         cronapi.database.Operations.query(Var.valueOf("app.entity.ProductEntry"),Var.valueOf("select \n	p \nfrom \n	ProductEntry p  \nwhere \n	p.id = :id"),Var.valueOf("id",
         cronapi.json.Operations.getJsonOrMapField(data,
         Var.valueOf("id"))));
