@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 13/05/2025, 14:30:57
+ * @since 20/05/2025, 13:10:16
  *
  */
 public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
@@ -30,39 +30,72 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
 
    public Var call() throws Exception {
     try {
-         System.out.println(
-        Var.valueOf("1").getObjectAsString());
-        user =
+         user =
         cronapi.util.Operations.callBlockly(Var.valueOf("blockly.user.GetLoggedUser:getEntity"));
-        System.out.println(
-        Var.valueOf("2").getObjectAsString());
         product =
         cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.GetProduct:getEntity"), Var.valueOf("cbd6ae39",
         cronapi.json.Operations.getJsonOrMapField(data,
         Var.valueOf("product_id"))));
-        System.out.println(
-        Var.valueOf("3").getObjectAsString());
         cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.UpdateProduct:updateAmountBeforeExit"), Var.valueOf("63c5ce49", product), Var.valueOf("49cb6752",
         cronapi.json.Operations.getJsonOrMapField(data,
         Var.valueOf("amount"))));
-        System.out.println(
-        Var.valueOf("4").getObjectAsString());
         productExitOnDB =
         cronapi.database.Operations.insert(Var.valueOf("app.entity.ProductExit"),Var.valueOf("amount",
         cronapi.json.Operations.getJsonOrMapField(data,
         Var.valueOf("amount"))),Var.valueOf("date",
         cronapi.dateTime.Operations.getNow()),Var.valueOf("product",product),Var.valueOf("registeringUser",user));
-        System.out.println(
-        Var.valueOf("5").getObjectAsString());
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
-         System.out.println(
-        Var.valueOf("ERRO FOI CHAMADO ").getObjectAsString());
-        System.out.println(
-        Var.valueOf("ERRO FOI CHAMADO ").getObjectAsString());
-        cronapi.util.Operations.throwException(
+         cronapi.util.Operations.throwException(
         cronapi.util.Operations.createException(
         cronapi.util.Operations.getExceptionMessage(e)));
+     }
+    return Var.VAR_NULL;
+   }
+ }.call();
+}
+
+/**
+ *
+ * @param data
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 20/05/2025, 13:10:16
+ *
+ */
+public static Var saveFromCSV(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
+ return new Callable<Var>() {
+
+   private Var product = Var.VAR_NULL;
+   private Var productExitOnDB = Var.VAR_NULL;
+   private Var e = Var.VAR_NULL;
+
+   public Var call() throws Exception {
+    try {
+         product =
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.GetProduct:getEntity"), Var.valueOf("cbd6ae39",
+        cronapi.json.Operations.getJsonOrMapField(
+        cronapi.json.Operations.getJsonOrMapField(data,
+        Var.valueOf("product")),
+        Var.valueOf("id"))));
+        productExitOnDB =
+        cronapi.database.Operations.insert(Var.valueOf("app.entity.ProductExit"),Var.valueOf("amount",
+        cronapi.json.Operations.getJsonOrMapField(data,
+        Var.valueOf("amount"))),Var.valueOf("date",
+        cronapi.json.Operations.getJsonOrMapField(data,
+        Var.valueOf("date"))),Var.valueOf("product",product),Var.valueOf("registeringUser",
+        cronapi.json.Operations.getJsonOrMapField(
+        cronapi.json.Operations.getJsonOrMapField(data,
+        Var.valueOf("registeringUser")),
+        Var.valueOf("id"))));
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.UpdateProduct:updateAmountBeforeExit"), Var.valueOf("63c5ce49", product), Var.valueOf("49cb6752",
+        cronapi.json.Operations.getJsonOrMapField(data,
+        Var.valueOf("amount"))));
+     } catch (Exception e_exception) {
+          e = Var.valueOf(e_exception);
+         cronapi.util.Operations.throwException(
+        cronapi.util.Operations.createException(
+        Var.valueOf("Erro ao adicionar uma saída a partir do csv.")));
      }
     return Var.VAR_NULL;
    }
