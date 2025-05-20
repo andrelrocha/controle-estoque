@@ -14,11 +14,43 @@ public static final int TIMEOUT = 300;
 
 /**
  *
+ * @param id
+ * @param newAmount
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 20/05/2025, 11:40:15
+ *
+ */
+public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "newAmount", id = "6e06289c") Var newAmount) throws Exception {
+  new Callable<Var>() {
+
+   private Var e = Var.VAR_NULL;
+
+   public Var call() throws Exception {
+    try {
+         if (
+        cronapi.logic.Operations.isNullOrEmpty(id2).getObjectAsBoolean()) {
+            cronapi.util.Operations.throwException(
+            cronapi.util.Operations.createException(
+            Var.valueOf("Não foi recebido ID válido para a atualização da quantidade do produto selecionado.")));
+        }
+        cronapi.database.Operations.execute(Var.valueOf("app.entity.Product"), Var.valueOf("update \n	Product  \nset \n	amount = :amount \nwhere \n	id = :id"),Var.valueOf("amount",newAmount),Var.valueOf("id",id2));
+     } catch (Exception e_exception) {
+          e = Var.valueOf(e_exception);
+         cronapi.util.Operations.throwException(e);
+     }
+   return Var.VAR_NULL;
+   }
+ }.call();
+}
+
+/**
+ *
  * @param Consulta a Entidades<app.entity.Product>
  * @param entryAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 13/05/2025, 14:31:33
+ * @since 20/05/2025, 11:40:15
  *
  */
 public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "entryAmount", id = "49cb6752") Var entryAmount) throws Exception {
@@ -66,7 +98,7 @@ public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 13/05/2025, 14:31:33
+ * @since 20/05/2025, 11:40:15
  *
  */
 public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -105,7 +137,7 @@ public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id
  * @param exitAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 13/05/2025, 14:31:33
+ * @since 20/05/2025, 11:40:15
  *
  */
 public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "exitAmount", id = "49cb6752") Var exitAmount) throws Exception {
@@ -175,7 +207,7 @@ public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 13/05/2025, 14:31:33
+ * @since 20/05/2025, 11:40:15
  *
  */
 public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
