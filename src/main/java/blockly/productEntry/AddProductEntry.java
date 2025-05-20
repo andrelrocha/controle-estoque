@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 19/05/2025, 14:20:40
+ * @since 20/05/2025, 10:32:50
  *
  */
 public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
@@ -59,7 +59,7 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 19/05/2025, 14:20:40
+ * @since 20/05/2025, 10:32:50
  *
  */
 public static Var saveFromCSV(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
@@ -93,7 +93,8 @@ public static Var saveFromCSV(@ParamMetaData(description = "data", id = "ce3ae7b
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
          cronapi.util.Operations.throwException(
-        cronapi.util.Operations.getExceptionMessage(e));
+        cronapi.util.Operations.createException(
+        Var.valueOf("Erro ao adicionar uma entrada a partir do csv.")));
      }
     return Var.VAR_NULL;
    }
