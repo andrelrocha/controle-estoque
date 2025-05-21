@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?><blockly audit="false" blocklyType="WEB" bpmnAble="false" formTarget="src/main/webapp/views/logged/produtos.view.html" functionCategory="" linkHelp="" multilayer="false" resourceType="JS" ruleDescription="ModalHandler" ruleName="ModalHandler" ruleSynchronous="false" ruleTimeout="" ruleType="I" showAsFunction="false" soap="false" swagger="false">
-  <metadata scale="1" scrollx="450.3" scrolly="-78.19999999999999" target="Anb:u5+^,0vLkL9QIqn5"/>
+  <metadata scale="1" scrollx="242.2999999999996" scrolly="-181.1999999999996" target="NTKBSsYd81i7{#zc4Y:j"/>
+  <block asynccall="false" colour="#995ba5" datasourcetype="" id="it3A3~g8x@NjoG{X#%pX" origintype="procedures_defreturn" output="false" score="9007199254740991" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" valueconstant="" x="-352" y="128">
+    <field customattributes="" name="NAME">openUpdateModal</field>
+    <statement name="STACK">
+      <block asynccall="false" colour="#934848" datasourcetype="" dependencyby="it3A3~g8x@NjoG{X#%pX" id="yk!aI@JSQVMi(c)aTih?" multilayer="true" namespace="cronapi.screen.showModal" origintype="procedures_callnoreturn" output="false" returntype="ObjectType.VOID" score="9007199254740991" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EExibir%20modal%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20que%20exibe%20um%20modal%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Identificador%20:%20Objeto%3C/span%3E%3Cdiv%3E%20Identificador%20do%20componente%20a%20ser%20modificado%3C/div%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20onclick=%22Blockly.Search.goToDoc('https://ide-next.cronapp.io/help?type=blockly&amp;amp;id=cronapi.screen.showModal','cronapi.screen.showModal')%22%20href=%22javascript:void(0)%22%3EAjuda%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callnoreturn" valueconstant="">
+        <mutation name="{{cronapi.screen.showModal}}" return-raw-type="undefined">
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.OBJECT" name="Identificador"/>
+        </mutation>
+        <value name="ARG0">
+          <block asynccall="false" colour="#934848" datasourcetype="" dependencyby="it3A3~g8x@NjoG{X#%pX" id="tI$u:|8OgXaqij8K_jQW" origintype="ids_from_screen" output="true" score="9007199254740991" type="ids_from_screen" valueconstant="">
+            <field customattributes="" name="SELECT">modalUpdateProduct</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
   <block asynccall="false" colour="#995ba5" datasourcetype="" id="Anb:u5+^,0vLkL9QIqn5" origintype="procedures_defreturn" output="false" score="9007199254740991" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" valueconstant="" x="-350" y="130">
     <field customattributes="" name="NAME">openAddModal</field>
     <statement name="STACK">
-      <block asynccall="false" colour="#fca03b" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="cYq/Hz))bUDyPv=,FD0Q" origintype="procedures_callnoreturn" output="false" score="9007199254740991" tooltip="Executa a função definida pelo usuário &quot;clearFields&quot;." type="procedures_callnoreturn" valueconstant="">
-        <mutation name="clearFields" return-raw-type="undefined"/>
+      <block asynccall="false" colour="#fca03b" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="cYq/Hz))bUDyPv=,FD0Q" origintype="procedures_callnoreturn" output="false" score="9007199254740991" tooltip="Executa a função definida pelo usuário &quot;clearCreateFields&quot;." type="procedures_callnoreturn" valueconstant="">
+        <mutation name="clearCreateFields" return-raw-type="undefined"/>
         <next>
           <block asynccall="false" colour="#934848" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="#+!7C[eAL=9w[XIsVFOE" multilayer="true" namespace="cronapi.screen.showModal" origintype="procedures_callnoreturn" output="false" returntype="ObjectType.VOID" score="9007199254740991" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EExibir%20modal%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20que%20exibe%20um%20modal%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Identificador%20:%20Objeto%3C/span%3E%3Cdiv%3E%20Identificador%20do%20componente%20a%20ser%20modificado%3C/div%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20onclick=%22Blockly.Search.goToDoc('https://ide-next.cronapp.io/help?type=blockly&amp;amp;id=cronapi.screen.showModal','cronapi.screen.showModal')%22%20href=%22javascript:void(0)%22%3EAjuda%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callnoreturn" valueconstant="">
             <mutation name="{{cronapi.screen.showModal}}" return-raw-type="undefined">
@@ -23,8 +38,8 @@
   <block asynccall="false" colour="#fca03b" datasourcetype="" id="eEEJza[!cB36Khx,]N#C" origintype="procedures_defnoreturn" output="false" score="9007199254740991" tooltip="Cria uma função que não tem retorno." type="procedures_defnoreturn" valueconstant="" x="-142" y="233">
     <field customattributes="" name="NAME">closeAddModal</field>
     <statement name="STACK">
-      <block asynccall="false" colour="#fca03b" datasourcetype="" dependencyby="eEEJza[!cB36Khx,]N#C" id="%E3yh+HLLpI;`fdI~2+i" origintype="procedures_callnoreturn" output="false" score="9007199254740991" tooltip="Executa a função definida pelo usuário &quot;clearFields&quot;." type="procedures_callnoreturn" valueconstant="">
-        <mutation name="clearFields" return-raw-type="undefined"/>
+      <block asynccall="false" colour="#fca03b" datasourcetype="" dependencyby="eEEJza[!cB36Khx,]N#C" id="%E3yh+HLLpI;`fdI~2+i" origintype="procedures_callnoreturn" output="false" score="9007199254740991" tooltip="Executa a função definida pelo usuário &quot;clearCreateFields&quot;." type="procedures_callnoreturn" valueconstant="">
+        <mutation name="clearCreateFields" return-raw-type="undefined"/>
         <next>
           <block asynccall="false" colour="#934848" datasourcetype="" dependencyby="eEEJza[!cB36Khx,]N#C" id="|}[:nJ;-nHhR_40bJoSg" multilayer="true" namespace="cronapi.screen.hideModal" origintype="procedures_callnoreturn" output="false" returntype="ObjectType.VOID" score="9007199254740991" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EEsconder%20modal%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20que%20esconde%20um%20modal%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Identificador%20:%20Objeto%3C/span%3E%3Cdiv%3E%20Identificador%20do%20componente%20a%20ser%20modificado%3C/div%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20onclick=%22Blockly.Search.goToDoc('https://ide-next.cronapp.io/help?type=blockly&amp;amp;id=cronapi.screen.hideModal','cronapi.screen.hideModal')%22%20href=%22javascript:void(0)%22%3EAjuda%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callnoreturn" valueconstant="">
             <mutation name="{{cronapi.screen.hideModal}}" return-raw-type="undefined">
@@ -40,8 +55,23 @@
       </block>
     </statement>
   </block>
+  <block asynccall="false" colour="#fca03b" datasourcetype="" id="NTKBSsYd81i7{#zc4Y:j" origintype="procedures_defnoreturn" output="false" score="9007199254740991" tooltip="Cria uma função que não tem retorno." type="procedures_defnoreturn" valueconstant="" x="-142" y="233">
+    <field customattributes="" name="NAME">closeUpdateModal</field>
+    <statement name="STACK">
+      <block asynccall="false" colour="#934848" datasourcetype="" dependencyby="NTKBSsYd81i7{#zc4Y:j" id=",X(tP(2x_ZSRMgi-kmTP" multilayer="true" namespace="cronapi.screen.hideModal" origintype="procedures_callnoreturn" output="false" returntype="ObjectType.VOID" score="9007199254740991" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EEsconder%20modal%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20que%20esconde%20um%20modal%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Identificador%20:%20Objeto%3C/span%3E%3Cdiv%3E%20Identificador%20do%20componente%20a%20ser%20modificado%3C/div%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20onclick=%22Blockly.Search.goToDoc('https://ide-next.cronapp.io/help?type=blockly&amp;amp;id=cronapi.screen.hideModal','cronapi.screen.hideModal')%22%20href=%22javascript:void(0)%22%3EAjuda%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callnoreturn" valueconstant="">
+        <mutation name="{{cronapi.screen.hideModal}}" return-raw-type="undefined">
+          <arg cronapi-raw-type="undefined" cronapi-type="ObjectType.OBJECT" name="Identificador"/>
+        </mutation>
+        <value name="ARG0">
+          <block asynccall="false" colour="#934848" datasourcetype="" dependencyby="NTKBSsYd81i7{#zc4Y:j" id="v1XHV`#9fjfa]ezSo51s" origintype="ids_from_screen" output="true" score="9007199254740991" type="ids_from_screen" valueconstant="">
+            <field customattributes="" name="SELECT">modalUpdateProduct</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
   <block asynccall="false" colour="#fca03b" datasourcetype="" id="Ya`wkk0cgAY#D_AirjAz" origintype="procedures_defnoreturn" output="false" score="9007199254740991" tooltip="Cria uma função que não tem retorno." type="procedures_defnoreturn" valueconstant="" x="-122" y="251">
-    <field customattributes="" name="NAME">clearFields</field>
+    <field customattributes="" name="NAME">clearCreateFields</field>
     <statement name="STACK">
       <block asynccall="false" colour="#934848" datasourcetype="" dependencyby="Ya`wkk0cgAY#D_AirjAz" id=";)v;n]L9.PRjjcVg)R!]" multilayer="true" namespace="cronapi.screen.changeValueOfField" origintype="procedures_callnoreturn" output="false" returntype="ObjectType.VOID" score="9007199254740991" tooltip="%3Cdiv%20class=%22name%22%3E%3Cstrong%3ENome:%3C/strong%3E%3Cdiv%3EAlterar%20valor%20do%20campo%3C/div%3E%3C/div%3E%3Cdiv%20class=%22description%22%3E%3Cstrong%3EDescri%C3%A7%C3%A3o:%3C/strong%3E%3Cdiv%3EFun%C3%A7%C3%A3o%20para%20alterar%20valor%20do%20campo%3C/div%3E%3C/div%3E%3Cdiv%20class=%22params%22%3E%3Cstrong%3EParam%C3%AAtro:%3C/strong%3E%3Cdiv%3E%3Cspan%3E%20-%20Campo%20:%20Texto%3C/span%3E%3Cbr%3E%3Cspan%3E%20-%20Valor%20:%20Texto%3C/span%3E%3Cbr%3E%3C/div%3E%3C/div%3E%3Cdiv%20class=%22link%22%3E%3Cstrong%3EAjuda:%3C/strong%3E%3Cdiv%20class=%22tooltip-link%22%3E%3Ca%20onclick=%22Blockly.Search.goToDoc('https://ide-next.cronapp.io/help?type=blockly&amp;amp;id=cronapi.screen.changeValueOfField','cronapi.screen.changeValueOfField')%22%20href=%22javascript:void(0)%22%3EAjuda%3C/a%3E%3C/div%3E%3C/div%3E" type="procedures_callnoreturn" valueconstant="">
         <mutation name="{{cronapi.screen.changeValueOfField}}" return-raw-type="undefined">

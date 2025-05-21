@@ -5,20 +5,37 @@ window.blockly.js.blockly.product = window.blockly.js.blockly.product || {};
 window.blockly.js.blockly.product.ModalHandler = window.blockly.js.blockly.product.ModalHandler || {};
 
 /**
+ * @function openUpdateModal
+ *
+ *
+ *
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 21/05/2025, 11:20:39
+ *
+ */
+window.blockly.js.blockly.product.ModalHandler.openUpdateModalArgs = [];
+window.blockly.js.blockly.product.ModalHandler.openUpdateModal = async function() {
+
+  //
+  this.cronapi.screen.showModal("modalUpdateProduct");
+}
+
+/**
  * @function openAddModal
  *
  *
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 11:10:10
+ * @since 21/05/2025, 11:20:39
  *
  */
 window.blockly.js.blockly.product.ModalHandler.openAddModalArgs = [];
 window.blockly.js.blockly.product.ModalHandler.openAddModal = async function() {
 
   //
-  (await this.cronapi.client('blockly.js.blockly.product.ModalHandler.clearFields').run());
+  (await this.cronapi.client('blockly.js.blockly.product.ModalHandler.clearCreateFields').run());
   //
   this.cronapi.screen.showModal("modalCreateProduct");
 }
@@ -30,30 +47,47 @@ window.blockly.js.blockly.product.ModalHandler.openAddModal = async function() {
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 11:10:10
+ * @since 21/05/2025, 11:20:39
  *
  */
 window.blockly.js.blockly.product.ModalHandler.closeAddModalArgs = [];
 window.blockly.js.blockly.product.ModalHandler.closeAddModal = async function() {
 
   //
-  (await this.cronapi.client('blockly.js.blockly.product.ModalHandler.clearFields').run());
+  (await this.cronapi.client('blockly.js.blockly.product.ModalHandler.clearCreateFields').run());
   //
   this.cronapi.screen.hideModal("modalCreateProduct");
 }
 
 /**
- * @function clearFields
+ * @function closeUpdateModal
  *
  *
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 11:10:10
+ * @since 21/05/2025, 11:20:39
  *
  */
-window.blockly.js.blockly.product.ModalHandler.clearFieldsArgs = [];
-window.blockly.js.blockly.product.ModalHandler.clearFields = async function() {
+window.blockly.js.blockly.product.ModalHandler.closeUpdateModalArgs = [];
+window.blockly.js.blockly.product.ModalHandler.closeUpdateModal = async function() {
+
+  //
+  this.cronapi.screen.hideModal("modalUpdateProduct");
+}
+
+/**
+ * @function clearCreateFields
+ *
+ *
+ *
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 21/05/2025, 11:20:39
+ *
+ */
+window.blockly.js.blockly.product.ModalHandler.clearCreateFieldsArgs = [];
+window.blockly.js.blockly.product.ModalHandler.clearCreateFields = async function() {
 
   //
   this.cronapi.screen.changeValueOfField("vars.modalCreateAmount", '');
