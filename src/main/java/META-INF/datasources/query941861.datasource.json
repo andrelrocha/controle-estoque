@@ -1,0 +1,165 @@
+{
+  "customId": "productsOrderedByName",
+  "queryName": "Products Ordered By Name",
+  "sourceType": "entityFullName",
+  "baseEntity": null,
+  "blockly": null,
+  "entitySimpleName": "Product",
+  "entityFullName": "app.entity.Product",
+  "query": {
+    "isValid": true,
+    "isEmpty": false,
+    "operationType": "object",
+    "isNativeQuery": false,
+    "namespace": "app",
+    "type": "select",
+    "rulesEntity": [
+      {
+        "entity": "Product",
+        "namespace": "app.entity.Product",
+        "dataSourceOptions": {
+          "id": "app.Product",
+          "customId": "Product",
+          "customQueryName": "app.Product",
+          "paramValues": [],
+          "entityFullName": "app.entity.Product",
+          "schemaFields": [
+            {
+              "name": "id",
+              "type": "String",
+              "nullable": false,
+              "notEmpty": false,
+              "key": false
+            },
+            {
+              "name": "name",
+              "type": "String",
+              "nullable": true,
+              "notEmpty": false,
+              "key": false
+            },
+            {
+              "name": "amount",
+              "type": "Int64",
+              "nullable": true,
+              "notEmpty": false,
+              "key": false
+            },
+            {
+              "name": "minQuantity",
+              "type": "Int32",
+              "nullable": true,
+              "notEmpty": false,
+              "key": false
+            },
+            {
+              "name": "maxQuantity",
+              "type": "Int64",
+              "nullable": true,
+              "notEmpty": false,
+              "key": false
+            },
+            {
+              "name": "_objectKey",
+              "type": "String",
+              "nullable": false,
+              "notEmpty": false,
+              "key": true
+            }
+          ],
+          "type": "entity",
+          "hasError": false,
+          "customName": "Product",
+          "fullName": "app.entity.Product",
+          "labelName": "app.entity.Product (Product)"
+        },
+        "alias": "p"
+      }
+    ],
+    "rulesSelect": [
+      {
+        "func": "get",
+        "field": "p",
+        "type": "string"
+      }
+    ],
+    "rulesJoin": [],
+    "rulesGroupBy": [],
+    "rulesHaving": [],
+    "rulesOrderBy": [
+      {
+        "func": "get",
+        "field": "p.name",
+        "order": "asc"
+      }
+    ],
+    "rules": {
+      "condition": "AND",
+      "rules": [],
+      "not": false,
+      "valid": true
+    },
+    "isRawSql": false,
+    "multiTenant": false,
+    "paginatorAutomatic": false,
+    "pagination": false
+  },
+  "queryParamsValues": [],
+  "verbs": {
+    "GET": true,
+    "GETAuthorities": null,
+    "POST": true,
+    "POSTAuthorities": null,
+    "PUT": true,
+    "PUTAuthorities": null,
+    "DELETE": true,
+    "DELETEAuthorities": null,
+    "FILTER": true,
+    "FILTERAuthorities": null,
+    "COUNT": true,
+    "COUNTAuthorities": null
+  },
+  "events": {
+    "beforeInsert": null,
+    "beforeUpdate": null,
+    "beforeDelete": null,
+    "afterInsert": null,
+    "afterUpdate": null,
+    "afterDelete": null,
+    "onNavigate": null,
+    "onAuthorize": null,
+    "onError": null
+  },
+  "defaultValues": {
+    "id": null,
+    "name": null,
+    "amount": null,
+    "minQuantity": null,
+    "maxQuantity": null
+  },
+  "defaultValuesProperties": {
+    "id": null,
+    "name": null,
+    "amount": null,
+    "minQuantity": null,
+    "maxQuantity": null
+  },
+  "security": {
+    "id": null,
+    "name": null,
+    "amount": null,
+    "minQuantity": null,
+    "maxQuantity": null
+  },
+  "calcFields": {},
+  "calcFieldsSecurity": {},
+  "calcFieldsProperties": {},
+  "headers": {},
+  "errorHandles": {
+    "primaryKey": null,
+    "foreignKey": null
+  },
+  "serviceUrl": "api/cronapi/odata/v2/app/query941861/",
+  "audit": false,
+  "swagger": false
+}
