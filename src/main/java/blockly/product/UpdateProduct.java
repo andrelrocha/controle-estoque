@@ -18,7 +18,7 @@ public static final int TIMEOUT = 300;
  * @param newAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:09:56
+ * @since 21/05/2025, 13:08:12
  *
  */
 public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "newAmount", id = "6e06289c") Var newAmount) throws Exception {
@@ -57,7 +57,7 @@ public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf8
  * @param entryAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:09:56
+ * @since 21/05/2025, 13:08:12
  *
  */
 public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "entryAmount", id = "49cb6752") Var entryAmount) throws Exception {
@@ -105,7 +105,7 @@ public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:09:56
+ * @since 21/05/2025, 13:08:12
  *
  */
 public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -144,7 +144,7 @@ public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id
  * @param exitAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:09:56
+ * @since 21/05/2025, 13:08:12
  *
  */
 public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "exitAmount", id = "49cb6752") Var exitAmount) throws Exception {
@@ -214,7 +214,7 @@ public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:09:56
+ * @since 21/05/2025, 13:08:12
  *
  */
 public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -243,6 +243,128 @@ public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2
          cronapi.util.Operations.throwException(e);
      }
     return Var.VAR_NULL;
+   }
+ }.call();
+}
+
+/**
+ *
+ * @param data
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 21/05/2025, 13:08:12
+ *
+ */
+public static Var updateFromJSON(@ParamMetaData(description = "param_data", id = "2cc85c57") @RequestBody(required = false) Var param_data) throws Exception {
+ return new Callable<Var>() {
+
+   // param
+   private Var data = param_data;
+   // end
+   private Var e = Var.VAR_NULL;
+
+   public Var call() throws Exception {
+    try {
+         if (
+        Var.valueOf(validateFields(data)).getObjectAsBoolean()) {
+            cronapi.database.Operations.execute(Var.valueOf("app.entity.Product"), Var.valueOf("update \n	Product  \nset \n	amount = :amount, \n	maxQuantity = :maxQuantity, \n	minQuantity = :minQuantity, \n	name = :name \nwhere \n	id = :id"),Var.valueOf("amount",
+            cronapi.json.Operations.getJsonOrMapField(data,
+            Var.valueOf("amount"))),Var.valueOf("maxQuantity",
+            cronapi.json.Operations.getJsonOrMapField(data,
+            Var.valueOf("maxQuantity"))),Var.valueOf("minQuantity",
+            cronapi.json.Operations.getJsonOrMapField(data,
+            Var.valueOf("minQuantity"))),Var.valueOf("name",
+            cronapi.json.Operations.getJsonOrMapField(data,
+            Var.valueOf("name"))),Var.valueOf("id",
+            cronapi.json.Operations.getJsonOrMapField(data,
+            Var.valueOf("id"))));
+        } else {
+            data =
+            Var.VAR_NULL;
+        }
+     } catch (Exception e_exception) {
+          e = Var.valueOf(e_exception);
+         cronapi.util.Operations.throwException(
+        cronapi.util.Operations.createException(
+        Var.valueOf("Erro ao atualizar um produto a partir de um JSON.")));
+     }
+    return data;
+   }
+ }.call();
+}
+
+/**
+ *
+ * @param data
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 21/05/2025, 13:08:12
+ *
+ */
+public static Var validateFields(@ParamMetaData(description = "data", id = "21505d1b") @RequestBody(required = false) Var data) throws Exception {
+ return new Callable<Var>() {
+
+   private Var status = Var.VAR_NULL;
+
+   public Var call() throws Exception {
+    status =
+    Var.VAR_TRUE;
+    if (
+    cronapi.logic.Operations.isNullOrEmpty(
+    cronapi.json.Operations.getJsonOrMapField(data,
+    Var.valueOf("name"))).getObjectAsBoolean()) {
+        status =
+        Var.VAR_FALSE;
+        cronapi.util.Operations.throwException(
+        cronapi.util.Operations.createException(
+        Var.valueOf("O nome do produto não pode ser vazio")));
+    }
+    if (
+    Var.valueOf(
+    cronapi.json.Operations.getJsonOrMapField(data,
+    Var.valueOf("amount")).compareTo(
+    Var.valueOf(0)) < 0).getObjectAsBoolean()) {
+        status =
+        Var.VAR_FALSE;
+        cronapi.util.Operations.throwException(
+        cronapi.util.Operations.createException(
+        Var.valueOf("Foi passada uma quantidade negativa para a atualização dos campos de um produto.")));
+    }
+    if (
+    Var.valueOf(
+    cronapi.json.Operations.getJsonOrMapField(data,
+    Var.valueOf("minQuantity")).compareTo(
+    Var.valueOf(0)) < 0).getObjectAsBoolean()) {
+        status =
+        Var.VAR_FALSE;
+        cronapi.util.Operations.throwException(
+        cronapi.util.Operations.createException(
+        Var.valueOf("Foi passada uma quantidade mínima negativa para a atualização dos campos de um produto.")));
+    }
+    if (
+    Var.valueOf(
+    cronapi.json.Operations.getJsonOrMapField(data,
+    Var.valueOf("maxQuantity")).compareTo(
+    Var.valueOf(0)) < 0).getObjectAsBoolean()) {
+        status =
+        Var.VAR_FALSE;
+        cronapi.util.Operations.throwException(
+        cronapi.util.Operations.createException(
+        Var.valueOf("Foi passada uma quantidade máxima negativa para a atualização dos campos de um produto.")));
+    }
+    if (
+    Var.valueOf(
+    cronapi.json.Operations.getJsonOrMapField(data,
+    Var.valueOf("maxQuantity")).compareTo(
+    cronapi.json.Operations.getJsonOrMapField(data,
+    Var.valueOf("minQuantity"))) < 0).getObjectAsBoolean()) {
+        status =
+        Var.VAR_FALSE;
+        cronapi.util.Operations.throwException(
+        cronapi.util.Operations.createException(
+        Var.valueOf("A quantidade mínima do produto deve ser inferior à quantidade máxima.")));
+    }
+    return status;
    }
  }.call();
 }
