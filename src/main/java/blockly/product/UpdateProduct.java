@@ -18,7 +18,7 @@ public static final int TIMEOUT = 300;
  * @param newAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 10:47:58
+ * @since 21/05/2025, 13:08:12
  *
  */
 public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "newAmount", id = "6e06289c") Var newAmount) throws Exception {
@@ -57,7 +57,7 @@ public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf8
  * @param entryAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 10:47:58
+ * @since 21/05/2025, 13:08:12
  *
  */
 public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "entryAmount", id = "49cb6752") Var entryAmount) throws Exception {
@@ -105,7 +105,7 @@ public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 10:47:58
+ * @since 21/05/2025, 13:08:12
  *
  */
 public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -144,7 +144,7 @@ public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id
  * @param exitAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 10:47:58
+ * @since 21/05/2025, 13:08:12
  *
  */
 public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "exitAmount", id = "49cb6752") Var exitAmount) throws Exception {
@@ -214,7 +214,7 @@ public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 10:47:58
+ * @since 21/05/2025, 13:08:12
  *
  */
 public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -252,12 +252,15 @@ public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 10:47:58
+ * @since 21/05/2025, 13:08:12
  *
  */
-public static Var updateFromJSON(@ParamMetaData(description = "data", id = "2cc85c57") @RequestBody(required = false) Var data) throws Exception {
+public static Var updateFromJSON(@ParamMetaData(description = "param_data", id = "2cc85c57") @RequestBody(required = false) Var param_data) throws Exception {
  return new Callable<Var>() {
 
+   // param
+   private Var data = param_data;
+   // end
    private Var e = Var.VAR_NULL;
 
    public Var call() throws Exception {
@@ -275,6 +278,9 @@ public static Var updateFromJSON(@ParamMetaData(description = "data", id = "2cc8
             Var.valueOf("name"))),Var.valueOf("id",
             cronapi.json.Operations.getJsonOrMapField(data,
             Var.valueOf("id"))));
+        } else {
+            data =
+            Var.VAR_NULL;
         }
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
@@ -282,7 +288,7 @@ public static Var updateFromJSON(@ParamMetaData(description = "data", id = "2cc8
         cronapi.util.Operations.createException(
         Var.valueOf("Erro ao atualizar um produto a partir de um JSON.")));
      }
-    return Var.VAR_NULL;
+    return data;
    }
  }.call();
 }
@@ -292,7 +298,7 @@ public static Var updateFromJSON(@ParamMetaData(description = "data", id = "2cc8
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 10:47:58
+ * @since 21/05/2025, 13:08:12
  *
  */
 public static Var validateFields(@ParamMetaData(description = "data", id = "21505d1b") @RequestBody(required = false) Var data) throws Exception {

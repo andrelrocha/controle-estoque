@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 13:10:16
+ * @since 21/05/2025, 12:48:21
  *
  */
 public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
@@ -60,7 +60,7 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 13:10:16
+ * @since 21/05/2025, 12:48:21
  *
  */
 public static Var saveFromCSV(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
@@ -97,7 +97,7 @@ public static Var saveFromCSV(@ParamMetaData(description = "data", id = "ce3ae7b
         cronapi.util.Operations.createException(
         Var.valueOf("Erro ao adicionar uma saída a partir do csv.")));
      }
-    return Var.VAR_NULL;
+    return productExitOnDB;
    }
  }.call();
 }

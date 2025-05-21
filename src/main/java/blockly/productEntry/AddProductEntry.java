@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 10:32:50
+ * @since 21/05/2025, 12:52:12
  *
  */
 public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
@@ -49,7 +49,7 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
          cronapi.util.Operations.throwException(
         cronapi.util.Operations.getExceptionMessage(e));
      }
-    return Var.VAR_NULL;
+    return productEntryOnDB;
    }
  }.call();
 }
@@ -59,7 +59,7 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 10:32:50
+ * @since 21/05/2025, 12:52:12
  *
  */
 public static Var saveFromCSV(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
@@ -96,7 +96,7 @@ public static Var saveFromCSV(@ParamMetaData(description = "data", id = "ce3ae7b
         cronapi.util.Operations.createException(
         Var.valueOf("Erro ao adicionar uma entrada a partir do csv.")));
      }
-    return Var.VAR_NULL;
+    return productEntryOnDB;
    }
  }.call();
 }

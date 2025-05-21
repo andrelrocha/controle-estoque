@@ -11,7 +11,7 @@ window.blockly.js.blockly.productEntry.AddProductEntry = window.blockly.js.block
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 12:27:37
+ * @since 21/05/2025, 12:52:18
  *
  */
 window.blockly.js.blockly.productEntry.AddProductEntry.runArgs = [];

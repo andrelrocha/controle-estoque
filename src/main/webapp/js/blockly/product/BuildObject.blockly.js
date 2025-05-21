@@ -5,22 +5,56 @@ window.blockly.js.blockly.product = window.blockly.js.blockly.product || {};
 window.blockly.js.blockly.product.BuildObject = window.blockly.js.blockly.product.BuildObject || {};
 
 /**
+ * @function buildUpdateProduct
+ *
+ *
+ *
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 21/05/2025, 13:06:59
+ *
+ */
+window.blockly.js.blockly.product.BuildObject.buildUpdateProductArgs = [];
+window.blockly.js.blockly.product.BuildObject.buildUpdateProduct = async function() {
+ var data;
+  //
+  data = this.cronapi.json.createObjectFromString('{}');
+  //
+  if ((await this.cronapi.client('blockly.js.blockly.product.BuildObject.validateFields').run(true))) {
+    //
+    this.cronapi.json.setProperty(data, 'name', this.cronapi.screen.getValueOfField("Product.active.name"));
+    //
+    this.cronapi.json.setProperty(data, 'amount', this.cronapi.screen.getValueOfField("Product.active.amount"));
+    //
+    this.cronapi.json.setProperty(data, 'minQuantity', this.cronapi.screen.getValueOfField("Product.active.minQuantity"));
+    //
+    this.cronapi.json.setProperty(data, 'maxQuantity', this.cronapi.screen.getValueOfField("Product.active.maxQuantity"));
+    //
+    this.cronapi.json.setProperty(data, 'id', this.cronapi.screen.getValueOfField("Product.active.id"));
+  } else {
+    //
+    data = null;
+  }
+  return data;
+}
+
+/**
  * @function buildCreateProduct
  *
  *
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 12:09:21
+ * @since 21/05/2025, 13:06:59
  *
  */
 window.blockly.js.blockly.product.BuildObject.buildCreateProductArgs = [];
 window.blockly.js.blockly.product.BuildObject.buildCreateProduct = async function() {
- var e, data;
+ var data;
   //
   data = this.cronapi.json.createObjectFromString('{}');
   //
-  if ((await this.cronapi.client('blockly.js.blockly.product.BuildObject.validateFields').run())) {
+  if ((await this.cronapi.client('blockly.js.blockly.product.BuildObject.validateFields').run(false))) {
     //
     this.cronapi.json.setProperty(data, 'name', this.cronapi.screen.getValueOfField("vars.modalCreateName"));
     //
@@ -41,24 +75,25 @@ window.blockly.js.blockly.product.BuildObject.buildCreateProduct = async functio
  *
  *
  *
+ * @param edit
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 12:09:21
+ * @since 21/05/2025, 13:06:59
  *
  */
-window.blockly.js.blockly.product.BuildObject.validateFieldsArgs = [];
-window.blockly.js.blockly.product.BuildObject.validateFields = async function() {
- var e, data;
+window.blockly.js.blockly.product.BuildObject.validateFieldsArgs = [{ description: 'edit', id: 'c98262f9' }];
+window.blockly.js.blockly.product.BuildObject.validateFields = async function(edit) {
+
   //
   status2 = true;
   //
-  name2 = this.cronapi.screen.getValueOfField("vars.modalCreateName");
+  name2 = edit ? this.cronapi.screen.getValueOfField("Product.active.name") : this.cronapi.screen.getValueOfField("vars.modalCreateName");
   //
-  amount = this.cronapi.screen.getValueOfField("vars.modalCreateAmount");
+  amount = edit ? this.cronapi.screen.getValueOfField("Product.active.amount") : this.cronapi.screen.getValueOfField("vars.modalCreateAmount");
   //
-  minQuantity = this.cronapi.screen.getValueOfField("vars.modalCreateMinQuantity");
+  minQuantity = edit ? this.cronapi.screen.getValueOfField("Product.active.minQuantity") : this.cronapi.screen.getValueOfField("vars.modalCreateMinQuantity");
   //
-  maxQuantity = this.cronapi.screen.getValueOfField("vars.modalCreateMaxQuantity");
+  maxQuantity = edit ? this.cronapi.screen.getValueOfField("Product.active.maxQuantity") : this.cronapi.screen.getValueOfField("vars.modalCreateMaxQuantity");
   //
   if (this.cronapi.logic.isNullOrEmpty(name2)) {
     //
