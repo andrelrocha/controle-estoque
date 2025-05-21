@@ -11,26 +11,32 @@ window.blockly.js.blockly.productEntry.AddProductEntry = window.blockly.js.block
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 28/04/2025, 19:02:43
+ * @since 21/05/2025, 12:27:37
  *
  */
 window.blockly.js.blockly.productEntry.AddProductEntry.runArgs = [];
 window.blockly.js.blockly.productEntry.AddProductEntry.run = async function() {
- var errorMessage, objData, e, serverResponse;
+ var objData, e, serverResponse;
   //
   try {
      //
     objData = (await this.cronapi.client('blockly.js.blockly.productEntry.BuildObject.buildAddProjectEntry').run());
     //
-    this.cronapi.util.callServerBlocklyAsynchronous('blockly.productEntry.AddProductEntry:save', async function(sender_serverResponse) {
-        serverResponse = sender_serverResponse;
+    if (!this.cronapi.logic.isNullOrEmpty(objData)) {
       //
-      this.cronapi.screen.notify('success','Entrada do produto adicionada com sucesso no sistema!');
-      //
-      this.cronapi.screen.refreshDatasource("ProductEntry", 'true');
-      //
-      (await this.cronapi.client('blockly.js.blockly.productEntry.ModalHandler.closeAddModal').run());
-    }.bind(this), objData);
+      this.cronapi.util.callServerBlocklyAsynchronous('blockly.productEntry.AddProductEntry:save', async function(sender_serverResponse) {
+          serverResponse = sender_serverResponse;
+        //
+        if (!this.cronapi.logic.isNullOrEmpty(serverResponse)) {
+          //
+          this.cronapi.screen.notify('success','Entrada do produto adicionada com sucesso no sistema!');
+          //
+          this.cronapi.screen.refreshDatasource("ProductEntry", 'true');
+          //
+          (await this.cronapi.client('blockly.js.blockly.productEntry.ModalHandler.closeAddModal').run());
+        }
+      }.bind(this), objData);
+    }
    } catch (e_exception) {
         e = e_exception;
      //

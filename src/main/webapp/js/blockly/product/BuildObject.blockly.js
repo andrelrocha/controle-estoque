@@ -11,12 +11,12 @@ window.blockly.js.blockly.product.BuildObject = window.blockly.js.blockly.produc
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 11:49:09
+ * @since 21/05/2025, 12:09:21
  *
  */
 window.blockly.js.blockly.product.BuildObject.buildCreateProductArgs = [];
 window.blockly.js.blockly.product.BuildObject.buildCreateProduct = async function() {
- var data;
+ var e, data;
   //
   data = this.cronapi.json.createObjectFromString('{}');
   //
@@ -29,6 +29,9 @@ window.blockly.js.blockly.product.BuildObject.buildCreateProduct = async functio
     this.cronapi.json.setProperty(data, 'minQuantity', this.cronapi.screen.getValueOfField("vars.modalCreateMinQuantity"));
     //
     this.cronapi.json.setProperty(data, 'maxQuantity', this.cronapi.screen.getValueOfField("vars.modalCreateMaxQuantity"));
+  } else {
+    //
+    data = null;
   }
   return data;
 }
@@ -40,52 +43,60 @@ window.blockly.js.blockly.product.BuildObject.buildCreateProduct = async functio
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 11:49:09
+ * @since 21/05/2025, 12:09:21
  *
  */
 window.blockly.js.blockly.product.BuildObject.validateFieldsArgs = [];
 window.blockly.js.blockly.product.BuildObject.validateFields = async function() {
- var data;
+ var e, data;
   //
   status2 = true;
   //
-  if (this.cronapi.logic.isNullOrEmpty(this.cronapi.screen.getValueOfField("vars.modalCreateName"))) {
+  name2 = this.cronapi.screen.getValueOfField("vars.modalCreateName");
+  //
+  amount = this.cronapi.screen.getValueOfField("vars.modalCreateAmount");
+  //
+  minQuantity = this.cronapi.screen.getValueOfField("vars.modalCreateMinQuantity");
+  //
+  maxQuantity = this.cronapi.screen.getValueOfField("vars.modalCreateMaxQuantity");
+  //
+  if (this.cronapi.logic.isNullOrEmpty(name2)) {
     //
     status2 = false;
     //
     this.cronapi.util.throwException(this.cronapi.util.createException('Campo nome não pode ser vazio'));
   }
   //
-  if (this.cronapi.logic.isNullOrEmpty(this.cronapi.screen.getValueOfField("vars.modalCreateAmount"))) {
+  if (this.cronapi.logic.isNullOrEmpty(amount)) {
     //
     status2 = false;
     //
     this.cronapi.util.throwException(this.cronapi.util.createException('Você deve indicar a quantidade do produto.'));
-  } else if (this.cronapi.screen.getValueOfField("vars.modalCreateAmount") < 0) {
+  } else if (amount < 0) {
     //
     status2 = false;
     //
     this.cronapi.util.throwException(this.cronapi.util.createException('A quantidade do produto não pode ser negativa.'));
   }
   //
-  if (this.cronapi.logic.isNullOrEmpty(this.cronapi.screen.getValueOfField("vars.modalCreateMinQuantity"))) {
+  if (this.cronapi.logic.isNullOrEmpty(minQuantity)) {
     //
     status2 = false;
     //
     this.cronapi.util.throwException(this.cronapi.util.createException('Você deve indicar a quantidade mínima do produto.'));
-  } else if (this.cronapi.screen.getValueOfField("vars.modalCreateMinQuantity") < 0) {
+  } else if (minQuantity < 0) {
     //
     status2 = false;
     //
     this.cronapi.util.throwException(this.cronapi.util.createException('A quantidade mínima do produto não pode ser negativa.'));
   }
   //
-  if (this.cronapi.logic.isNullOrEmpty(this.cronapi.screen.getValueOfField("vars.modalCreateMaxQuantity"))) {
+  if (this.cronapi.logic.isNullOrEmpty(maxQuantity)) {
     //
     status2 = false;
     //
     this.cronapi.util.throwException(this.cronapi.util.createException('Você deve indicar a quantidade máxima do produto.'));
-  } else if (this.cronapi.screen.getValueOfField("vars.modalCreateMaxQuantity") < 0) {
+  } else if (0 < 0) {
     //
     status2 = false;
     //

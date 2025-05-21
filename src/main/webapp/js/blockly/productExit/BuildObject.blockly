@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><blockly audit="false" blocklyType="WEB" bpmnAble="false" formTarget="src/main/webapp/views/logged/funcionario/saidaprodutos.view.html" functionCategory="" linkHelp="" multilayer="false" resourceType="JS" ruleDescription="BuildObject" ruleName="BuildObject" ruleSynchronous="false" ruleTimeout="" ruleType="I" showAsFunction="false" soap="false" swagger="false">
-  <metadata scale="0.8333333333333334" scrollx="391.9666666666667" scrolly="-56.53333333333333" target="Anb:u5+^,0vLkL9QIqn5"/>
+  <metadata scale="1" scrollx="444.2999999999997" scrolly="-139.19999999999987" target="Anb:u5+^,0vLkL9QIqn5"/>
   <block asynccall="false" colour="#995ba5" datasourcetype="" id="Anb:u5+^,0vLkL9QIqn5" origintype="procedures_defreturn" output="false" score="9007199254740991" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" valueconstant="" x="-350" y="130">
     <field customattributes="" name="NAME">buildAddProjectExit</field>
     <statement name="STACK">
@@ -19,6 +19,7 @@
         </value>
         <next>
           <block asynccall="false" colour="#5b80a5" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="ltgN4orp6Y2TW4Bj.rO." origintype="controls_if" output="false" score="9007199254740991" tooltip="function () { [native code] }" type="controls_if" valueconstant="">
+            <mutation else="1"/>
             <value name="IF0">
               <block asynccall="false" colour="#fca03b" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="CkCvE3A=L.|Z*J5)Alfn" origintype="procedures_callreturn" output="true" score="9007199254740991" tooltip="Executa a função definida pelo usuário &quot;validateFields&quot; e usa seu retorno." type="procedures_callreturn" valueconstant="">
                 <mutation name="validateFields" return-raw-type="undefined"/>
@@ -84,6 +85,14 @@
                     </value>
                   </block>
                 </next>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block asynccall="false" colour="#0088ee" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="r1mnmSBFsd:C-3RWN.ef" origintype="variables_set" output="false" score="9007199254740991" tooltip="Define esta variável para o valor da entrada." type="variables_set" valueconstant="">
+                <field customattributes="" name="VAR">data</field>
+                <value name="VALUE">
+                  <block asynccall="false" colour="#5b80a5" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="OsznNb@qyu3nCcFT@T)s" origintype="logic_null" output="true" score="9007199254740991" tooltip="Retorna nulo." type="logic_null" valueconstant=""/>
+                </value>
               </block>
             </statement>
           </block>

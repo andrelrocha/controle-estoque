@@ -11,12 +11,12 @@ window.blockly.js.blockly.productExit.BuildObject = window.blockly.js.blockly.pr
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 11:51:30
+ * @since 21/05/2025, 12:15:39
  *
  */
 window.blockly.js.blockly.productExit.BuildObject.buildAddProjectExitArgs = [];
 window.blockly.js.blockly.productExit.BuildObject.buildAddProjectExit = async function() {
- var e, data;
+ var data;
   //
   data = this.cronapi.json.createObjectFromString('{}');
   //
@@ -25,6 +25,9 @@ window.blockly.js.blockly.productExit.BuildObject.buildAddProjectExit = async fu
     this.cronapi.json.setProperty(data, 'product_id', this.cronapi.screen.getValueOfField("vars.modalAddProductId"));
     //
     this.cronapi.json.setProperty(data, 'amount', this.cronapi.screen.getValueOfField("vars.modalAddAmount"));
+  } else {
+    //
+    data = null;
   }
   return data;
 }
@@ -36,12 +39,12 @@ window.blockly.js.blockly.productExit.BuildObject.buildAddProjectExit = async fu
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 11:51:30
+ * @since 21/05/2025, 12:15:39
  *
  */
 window.blockly.js.blockly.productExit.BuildObject.validateFieldsArgs = [];
 window.blockly.js.blockly.productExit.BuildObject.validateFields = async function() {
- var e, data;
+ var data;
   //
   status2 = true;
   //
