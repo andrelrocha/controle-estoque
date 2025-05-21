@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><blockly audit="false" blocklyType="JAVA" bpmnAble="false" formTarget="" functionCategory="" linkHelp="" multilayer="false" resourceType="JAVA" ruleDescription="UpdateProduct" ruleName="UpdateProduct" ruleSynchronous="false" ruleTimeout="" ruleType="I" showAsFunction="false" soap="false" swagger="false">
-  <metadata scale="0.8333333333333334" scrollx="-31.366666666666674" scrolly="-1129.8666666666668" target="us(N^80=91(=e*~J%2?z"/>
+  <metadata scale="0.8333333333333334" scrollx="-80.36666666666656" scrolly="-1245.8666666666718" target="us(N^80=91(=e*~J%2?z"/>
   <block asynccall="false" colour="#995ba5" datasourcetype="" id="5.{Fl9YEWA.gU3mlVC/Y" origintype="procedures_defreturn" output="false" score="9007199254740991" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" valueconstant="" x="-324" y="133">
     <mutation>
       <arg id="63c5ce49" name="Consulta a Entidades&amp;lt;app.entity.Product&amp;gt;"/>
@@ -965,6 +965,7 @@
         <mutation catch="1"/>
         <statement name="TRY">
           <block asynccall="false" colour="#5b80a5" datasourcetype="" dependencyby="us(N^80=91(=e*~J%2?z" id="`~HgBoID.k)H9H7})jAh" origintype="controls_if" output="false" score="9007199254740991" tooltip="function () { [native code] }" type="controls_if" valueconstant="">
+            <mutation else="1"/>
             <value name="IF0">
               <block asynccall="false" colour="#fca03b" datasourcetype="" dependencyby="us(N^80=91(=e*~J%2?z" id="AIyd*6#$;:!+_r`lUyT+" origintype="procedures_callreturn" output="true" score="9007199254740991" tooltip="Executa a função definida pelo usuário &quot;validateFields&quot; e usa seu retorno." type="procedures_callreturn" valueconstant="">
                 <mutation name="validateFields" return-raw-type="undefined">
@@ -1078,6 +1079,14 @@
                 </value>
               </block>
             </statement>
+            <statement name="ELSE">
+              <block asynccall="false" colour="#0088ee" datasourcetype="" dependencyby="us(N^80=91(=e*~J%2?z" id=":/Vap/LsR(~J,](x4%kL" origintype="variables_set" output="false" score="9007199254740991" tooltip="Define esta variável para o valor da entrada." type="variables_set" valueconstant="">
+                <field customattributes="" name="VAR">data</field>
+                <value name="VALUE">
+                  <block asynccall="false" colour="#5b80a5" datasourcetype="" dependencyby="us(N^80=91(=e*~J%2?z" id="_oL::3o}AF4I`5[JG/{^" origintype="logic_null" output="true" score="9007199254740991" tooltip="Retorna nulo." type="logic_null" valueconstant=""/>
+                </value>
+              </block>
+            </statement>
           </block>
         </statement>
         <value name="EXCEPTION1">
@@ -1106,8 +1115,13 @@
         </statement>
       </block>
     </statement>
+    <value name="RETURN">
+      <block asynccall="false" colour="#0088ee" datasourcetype="" dependencyby="us(N^80=91(=e*~J%2?z" id=",g(-YY8%D2l]!~)%Q_jR" origintype="variables_get" output="true" score="9007199254740991" tooltip="Retorna o valor desta variável." type="variables_get" valueconstant="">
+        <field customattributes="" name="VAR">data</field>
+      </block>
+    </value>
   </block>
-  <block asynccall="false" colour="#fca03b" datasourcetype="" id=",SVdt+7qLYPR+H{]KYEz" origintype="procedures_defreturn" output="false" score="9007199254740991" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" valueconstant="" x="212" y="1369">
+  <block asynccall="false" colour="#fca03b" datasourcetype="" id=",SVdt+7qLYPR+H{]KYEz" origintype="procedures_defreturn" output="false" score="9007199254740991" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" valueconstant="" x="255" y="1407">
     <mutation>
       <arg id="21505d1b" name="data"/>
     </mutation>
