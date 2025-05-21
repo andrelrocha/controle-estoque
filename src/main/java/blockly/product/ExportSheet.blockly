@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><blockly audit="false" blocklyType="JAVA" bpmnAble="false" formTarget="" functionCategory="" linkHelp="" multilayer="false" resourceType="JAVA" ruleDescription="ExportSheet" ruleName="ExportSheet" ruleSynchronous="false" ruleTimeout="" ruleType="I" showAsFunction="false" soap="false" swagger="false">
-  <metadata scale="0.8333333333333334" scrollx="236.16668176651012" scrolly="-551.1666793823242" target="Anb:u5+^,0vLkL9QIqn5"/>
+  <metadata scale="1" scrollx="246.5374984741211" scrolly="-463.1999999999988" target="Anb:u5+^,0vLkL9QIqn5"/>
   <block asynccall="false" colour="#5ba593" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="X%:~J*%cuF(LUvoC+oRQ" origintype="text" output="true" score="9007199254740991" tooltip="function () { [native code] }" type="text" valueconstant="" x="143" y="98">
     <field customattributes="" name="TEXT">src/main/resources/file.csv</field>
   </block>
@@ -326,11 +326,5 @@
         </value>
       </block>
     </value>
-  </block>
-  <block asynccall="false" colour="#db802b" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="/5sfdgfF)UxThSlZdln?" origintype="procedures_get_field_datasource" output="true" score="9007199254740991" type="procedures_get_field_datasource" valueconstant="" x="593" y="442">
-    <mutation name="">
-      <arg label="" value=""/>
-    </mutation>
-    <field customattributes="" name="SELECT"/>
   </block>
 </blockly>

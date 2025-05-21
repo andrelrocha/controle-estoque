@@ -15,7 +15,7 @@ public static final int TIMEOUT = 300;
 /**
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 19/05/2025, 11:34:07
+ * @since 21/05/2025, 10:18:56
  *
  */
 public static Var exportCsv() throws Exception {

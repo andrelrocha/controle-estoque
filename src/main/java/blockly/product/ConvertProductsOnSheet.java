@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param fileData
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 16/05/2025, 12:28:54
+ * @since 21/05/2025, 10:29:46
  *
  */
 public static Var convertFromCsv(@ParamMetaData(description = "fileData", id = "ba10b34b") @RequestBody(required = false) Var fileData) throws Exception {
@@ -76,9 +76,9 @@ public static Var convertFromCsv(@ParamMetaData(description = "fileData", id = "
                     cronapi.list.Operations.get(listGeneratedByLines,
                     Var.valueOf(3))),Var.valueOf("minQuantity",
                     cronapi.list.Operations.get(listGeneratedByLines,
-                    Var.valueOf(5))),Var.valueOf("maxQuantity",
+                    Var.valueOf(4))),Var.valueOf("maxQuantity",
                     cronapi.list.Operations.get(listGeneratedByLines,
-                    Var.valueOf(4))));
+                    Var.valueOf(5))));
                     cronapi.list.Operations.set(productsList,(listIndex),product);
                 }
                 listIndex =
@@ -106,7 +106,7 @@ public static Var convertFromCsv(@ParamMetaData(description = "fileData", id = "
  * @param fileData
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 16/05/2025, 12:28:54
+ * @since 21/05/2025, 10:29:46
  *
  */
 public static Var handleProductsUpdateProcess(@ParamMetaData(description = "fileData", id = "3b1cb5b6") @RequestBody(required = false) Var fileData) throws Exception {
@@ -121,7 +121,7 @@ public static Var handleProductsUpdateProcess(@ParamMetaData(description = "file
          productsList =
         Var.valueOf(convertFromCsv(fileData));
         response =
-        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.UpdateFromCSV:manage"), Var.valueOf("cd44578b", productsList));
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.CreateOrUpdateFromCSV:manage"), Var.valueOf("cd44578b", productsList));
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
          cronapi.util.Operations.throwException(e);
