@@ -18,13 +18,14 @@ public static final int TIMEOUT = 300;
  * @param newAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 23/05/2025, 13:10:02
  *
  */
 public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "newAmount", id = "6e06289c") Var newAmount) throws Exception {
   new Callable<Var>() {
 
    private Var e = Var.VAR_NULL;
+   private Var auditMessage = Var.VAR_NULL;
 
    public Var call() throws Exception {
     try {
@@ -42,6 +43,17 @@ public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf8
             Var.valueOf("Não pode ser passado um valor negativo como nova quantidade de um produto..")));
         }
         cronapi.database.Operations.execute(Var.valueOf("app.entity.Product"), Var.valueOf("update \n	Product  \nset \n	amount = :amount \nwhere \n	id = :id"),Var.valueOf("amount",newAmount),Var.valueOf("id",id2));
+        auditMessage =
+        Var.valueOf(
+        cronapi.util.Operations.getCurrentUserName().getObjectAsString() +
+        Var.valueOf(" updated ").getObjectAsString() +
+        cronapi.database.Operations.query(Var.valueOf("app.entity.Product"),Var.valueOf("select \n	p.name \nfrom \n	Product p  \nwhere \n	p.id = :id"),Var.valueOf("id",id2)).getObjectAsString() +
+        Var.valueOf(" to a new amount: ").getObjectAsString() +
+        newAmount.getObjectAsString());
+        cronapi.util.Operations.audit(
+        Var.valueOf("blockly.product.UpdateProduct"),
+        Var.valueOf("Updating Product amount"),
+        Var.valueOf("Blockly"), auditMessage);
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
          cronapi.util.Operations.throwException(e);
@@ -57,7 +69,7 @@ public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf8
  * @param entryAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 23/05/2025, 13:10:02
  *
  */
 public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "entryAmount", id = "49cb6752") Var entryAmount) throws Exception {
@@ -105,7 +117,7 @@ public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 23/05/2025, 13:10:02
  *
  */
 public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -144,7 +156,7 @@ public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id
  * @param exitAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 23/05/2025, 13:10:02
  *
  */
 public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "exitAmount", id = "49cb6752") Var exitAmount) throws Exception {
@@ -214,7 +226,7 @@ public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 23/05/2025, 13:10:02
  *
  */
 public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -252,7 +264,7 @@ public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 23/05/2025, 13:10:02
  *
  */
 public static Var updateFromJSON(@ParamMetaData(description = "param_data", id = "2cc85c57") @RequestBody(required = false) Var param_data) throws Exception {
@@ -262,6 +274,8 @@ public static Var updateFromJSON(@ParamMetaData(description = "param_data", id =
    private Var data = param_data;
    // end
    private Var e = Var.VAR_NULL;
+   private Var auditMessage = Var.VAR_NULL;
+   private Var updatedProduct = Var.VAR_NULL;
 
    public Var call() throws Exception {
     try {
@@ -278,6 +292,23 @@ public static Var updateFromJSON(@ParamMetaData(description = "param_data", id =
             Var.valueOf("name"))),Var.valueOf("id",
             cronapi.json.Operations.getJsonOrMapField(data,
             Var.valueOf("id"))));
+            updatedProduct =
+            cronapi.list.Operations.getFirst((
+            cronapi.database.Operations.query(Var.valueOf("app.entity.Product"),Var.valueOf("select \n	p \nfrom \n	Product p  \nwhere \n	p.id = :id"),Var.valueOf("id",
+            cronapi.json.Operations.getJsonOrMapField(data,
+            Var.valueOf("id"))))));
+            auditMessage =
+            Var.valueOf(
+            cronapi.util.Operations.getCurrentUserName().getObjectAsString() +
+            Var.valueOf(" updated ").getObjectAsString() +
+            cronapi.json.Operations.getJsonOrMapField(updatedProduct,
+            Var.valueOf("name")).getObjectAsString() +
+            Var.valueOf(": ").getObjectAsString() +
+            cronapi.conversion.Operations.toString(updatedProduct).getObjectAsString());
+            cronapi.util.Operations.audit(
+            Var.valueOf("blockly.product.UpdateProduct"),
+            Var.valueOf("Updating Product from JSON"),
+            Var.valueOf("Blockly"), auditMessage);
         } else {
             data =
             Var.VAR_NULL;
@@ -298,7 +329,7 @@ public static Var updateFromJSON(@ParamMetaData(description = "param_data", id =
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 23/05/2025, 13:10:02
  *
  */
 public static Var validateFields(@ParamMetaData(description = "data", id = "21505d1b") @RequestBody(required = false) Var data) throws Exception {
