@@ -11,29 +11,22 @@ window.blockly.js.blockly.productEntry.DownloadSheet = window.blockly.js.blockly
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 12:08:04
+ * @since 26/05/2025, 14:46:51
  *
  */
 window.blockly.js.blockly.productEntry.DownloadSheet.downloadCsvArgs = [];
 window.blockly.js.blockly.productEntry.DownloadSheet.downloadCsv = async function() {
- var objData, e, serverResponse;
+ var e, serverResponse;
   //
-  try {
-     //
-    this.cronapi.util.callServerBlocklyAsynchronous('blockly.productEntry.ExportSheet:exportCsv', async function(sender_serverResponse) {
-        serverResponse = sender_serverResponse;
+  this.cronapi.util.callServerBlocklyAsynchronous('blockly.productEntry.ExportSheet:exportCsv', async function(sender_serverResponse) {
+      serverResponse = sender_serverResponse;
+    //
+    if (this.cronapi.json.getProperty(serverResponse, 'success')) {
       //
-      if (this.cronapi.json.getProperty(serverResponse, 'success')) {
-        //
-        this.cronapi.screen.notify('success',this.cronapi.json.getProperty(serverResponse, 'message'));
-      } else {
-        //
-        this.cronapi.util.throwException(this.cronapi.json.getProperty(serverResponse, 'message'));
-      }
-    }.bind(this));
-   } catch (e_exception) {
-        e = e_exception;
-     //
-    this.cronapi.screen.notify('error',e);
-   }
+      this.cronapi.screen.notify('success',this.cronapi.json.getProperty(serverResponse, 'message'));
+    } else {
+      //
+      this.cronapi.screen.notify('error',this.cronapi.json.getProperty(serverResponse, 'message'));
+    }
+  }.bind(this));
 }

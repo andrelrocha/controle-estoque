@@ -11,12 +11,12 @@ window.blockly.js.blockly.productEntry.AddProductEntry = window.blockly.js.block
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 14:27:19
+ * @since 26/05/2025, 14:43:19
  *
  */
 window.blockly.js.blockly.productEntry.AddProductEntry.addArgs = [];
 window.blockly.js.blockly.productEntry.AddProductEntry.add = async function() {
- var e, objData, serverResponse;
+ var objData, serverResponse;
   //
   objData = (await this.cronapi.client('blockly.js.blockly.productEntry.BuildObject.buildAddProjectEntry').run());
   //
@@ -34,7 +34,7 @@ window.blockly.js.blockly.productEntry.AddProductEntry.add = async function() {
         (await this.cronapi.client('blockly.js.blockly.productEntry.ModalHandler.closeAddModal').run());
       } else {
         //
-        this.cronapi.util.throwException(this.cronapi.json.getProperty(serverResponse, 'message'));
+        this.cronapi.screen.notify('error',this.cronapi.json.getProperty(serverResponse, 'message'));
       }
     }.bind(this), objData);
   }

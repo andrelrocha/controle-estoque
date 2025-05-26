@@ -11,12 +11,12 @@ window.blockly.js.blockly.productEntry.BuildObject = window.blockly.js.blockly.p
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 10:58:14
+ * @since 26/05/2025, 14:46:02
  *
  */
 window.blockly.js.blockly.productEntry.BuildObject.buildAddProjectEntryArgs = [];
 window.blockly.js.blockly.productEntry.BuildObject.buildAddProjectEntry = async function() {
- var data;
+ var edit, status, productId, amount;
   //
   data = this.cronapi.json.createObjectFromString('{}');
   //
@@ -39,12 +39,12 @@ window.blockly.js.blockly.productEntry.BuildObject.buildAddProjectEntry = async 
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 10:58:14
+ * @since 26/05/2025, 14:46:02
  *
  */
 window.blockly.js.blockly.productEntry.BuildObject.buildUpdateProjectEntryArgs = [];
 window.blockly.js.blockly.productEntry.BuildObject.buildUpdateProjectEntry = async function() {
- var data;
+ var edit, status, productId, amount;
   //
   data = this.cronapi.json.createObjectFromString('{}');
   //
@@ -72,12 +72,12 @@ window.blockly.js.blockly.productEntry.BuildObject.buildUpdateProjectEntry = asy
  * @param edit
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 10:58:14
+ * @since 26/05/2025, 14:46:02
  *
  */
 window.blockly.js.blockly.productEntry.BuildObject.validateFieldsArgs = [{ description: 'edit', id: 'd402b022' }];
 window.blockly.js.blockly.productEntry.BuildObject.validateFields = async function(edit) {
-
+ var status, productId, amount;
   //
   status2 = true;
   //
@@ -89,19 +89,19 @@ window.blockly.js.blockly.productEntry.BuildObject.validateFields = async functi
     //
     status2 = false;
     //
-    this.cronapi.util.throwException(this.cronapi.util.createException('Você deve selecionar um produto.'));
+    this.cronapi.screen.notify('warning','Campo produto não pode ser vazio.');
   }
   //
   if (this.cronapi.logic.isNullOrEmpty(amount)) {
     //
     status2 = false;
     //
-    this.cronapi.util.throwException(this.cronapi.util.createException('Você deve indicar a quantidade que está sendo adicionada do produto.'));
+    this.cronapi.screen.notify('warning','Campo quantidade não pode ser vazio.');
   } else if (amount < 0) {
     //
     status2 = false;
     //
-    this.cronapi.util.throwException(this.cronapi.util.createException('A quantidade de uma entrada não pode ser negativa.'));
+    this.cronapi.screen.notify('warning','A quantidade de uma entrada não pode ser negativa.');
   }
   return status2;
 }
