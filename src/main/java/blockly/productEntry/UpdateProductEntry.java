@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 10:55:27
+ * @since 26/05/2025, 11:59:36
  *
  */
 public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @RequestBody(required = false) Var data) throws Exception {
@@ -37,27 +37,23 @@ public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @
          if (
         Var.valueOf(validateJsonFields(data)).getObjectAsBoolean()) {
             productEntry =
-            cronapi.database.Operations.query(Var.valueOf("app.entity.ProductEntry"),Var.valueOf("select \n	p \nfrom \n	ProductEntry p  \nwhere \n	p.id = :id"),Var.valueOf("id",
+            cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productEntry.GetProductEntry:getById"), Var.valueOf("257982f0",
             cronapi.json.Operations.getJsonOrMapField(data,
             Var.valueOf("id"))));
-            if (
-            cronapi.logic.Operations.isNullOrEmpty(productEntry).getObjectAsBoolean()) {
-                cronapi.util.Operations.throwException(
-                cronapi.util.Operations.createException(
-                Var.valueOf("Não foi encontrada uma entrada com o id informado.")));
-            }
             productId =
             cronapi.json.Operations.getJsonOrMapField(data,
             Var.valueOf("product"));
             productAmount =
-            cronapi.database.Operations.getField(productEntry,
-            Var.valueOf("this[0].product.amount"));
+            cronapi.json.Operations.getJsonOrMapField(
+            cronapi.json.Operations.getJsonOrMapField(productEntry,
+            Var.valueOf("product")),
+            Var.valueOf("amount"));
             newEntryAmount =
             cronapi.json.Operations.getJsonOrMapField(data,
             Var.valueOf("amount"));
             oldEntryAmount =
-            cronapi.database.Operations.getField(productEntry,
-            Var.valueOf("this[0].amount"));
+            cronapi.json.Operations.getJsonOrMapField(productEntry,
+            Var.valueOf("amount"));
             amountDifference =
             cronapi.math.Operations.subtract(newEntryAmount,oldEntryAmount);
             cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.UpdateProduct:updateAmount"), Var.valueOf("322cf808", productId), Var.valueOf("6e06289c",
@@ -87,7 +83,7 @@ public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 10:55:27
+ * @since 26/05/2025, 11:59:36
  *
  */
 public static Var validateJsonFields(@ParamMetaData(description = "data", id = "aa7efe5a") @RequestBody(required = false) Var data) throws Exception {
