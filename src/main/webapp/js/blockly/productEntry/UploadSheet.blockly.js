@@ -11,12 +11,12 @@ window.blockly.js.blockly.productEntry.UploadSheet = window.blockly.js.blockly.p
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 09:11:23
+ * @since 26/05/2025, 14:37:53
  *
  */
 window.blockly.js.blockly.productEntry.UploadSheet.readAndConvertArgs = [];
 window.blockly.js.blockly.productEntry.UploadSheet.readAndConvert = async function() {
-
+ var fileJson, e, serverResponse;
   //
   try {
      //
@@ -24,21 +24,26 @@ window.blockly.js.blockly.productEntry.UploadSheet.readAndConvert = async functi
     //
     if ((await this.cronapi.client('blockly.js.blockly.productEntry.UploadSheet.validate').run(fileJson))) {
       //
-      this.cronapi.util.callServerBlocklyAsynchronous('blockly.productEntry.ConvertProductEntriesOnSheet:handleProductsEntriesUpdateProcess', async function(sender_item) {
-          item = sender_item;
+      this.cronapi.util.callServerBlocklyAsynchronous('blockly.productEntry.ConvertProductEntriesOnSheet:handleProductsEntriesUpdateProcess', async function(sender_serverResponse) {
+          serverResponse = sender_serverResponse;
         //
-        this.cronapi.screen.refreshDatasource("ProductEntry", 'true');
-        //
-        (await this.cronapi.client('blockly.js.blockly.productEntry.UploadSheet.closeModal').run());
+        if (this.cronapi.json.getProperty(serverResponse, 'success')) {
+          //
+          this.cronapi.screen.notify('success',this.cronapi.json.getProperty(serverResponse, 'message'));
+          //
+          this.cronapi.screen.refreshDatasource("ProductEntry", 'true');
+          //
+          (await this.cronapi.client('blockly.js.blockly.productEntry.UploadSheet.closeModal').run());
+        } else {
+          //
+          this.cronapi.util.throwException(this.cronapi.util.createException(this.cronapi.json.getProperty(serverResponse, 'message')));
+        }
       }.bind(this), fileJson);
-    } else {
-      //
-      this.cronapi.util.throwException(this.cronapi.util.createException('Erro ao ler a planilha com as entradas atualizados.'));
     }
    } catch (e_exception) {
         e = e_exception;
      //
-    this.cronapi.util.throwException(e);
+    this.cronapi.screen.notify('error',e);
    }
 }
 
@@ -49,12 +54,12 @@ window.blockly.js.blockly.productEntry.UploadSheet.readAndConvert = async functi
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 09:11:23
+ * @since 26/05/2025, 14:37:53
  *
  */
 window.blockly.js.blockly.productEntry.UploadSheet.buildFileAsJsonArgs = [];
 window.blockly.js.blockly.productEntry.UploadSheet.buildFileAsJson = async function() {
-
+ var fileJson, e, serverResponse;
   return this.cronapi.json.createObjectFromString(this.cronapi.screen.getValueOfField("vars.excelFileToUpload"));
 }
 
@@ -66,12 +71,12 @@ window.blockly.js.blockly.productEntry.UploadSheet.buildFileAsJson = async funct
  * @param fileData
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 09:11:23
+ * @since 26/05/2025, 14:37:53
  *
  */
 window.blockly.js.blockly.productEntry.UploadSheet.validateArgs = [{ description: 'fileData', id: 'b1d364dc' }];
 window.blockly.js.blockly.productEntry.UploadSheet.validate = async function(fileData) {
-
+ var fileJson, e;
   //
   isValid = true;
   //
@@ -79,7 +84,7 @@ window.blockly.js.blockly.productEntry.UploadSheet.validate = async function(fil
     //
     isValid = false;
     //
-    this.cronapi.screen.notify('error','Você deve enviar um arquivo.');
+    this.cronapi.util.throwException(this.cronapi.util.createException('Você deve enviar um arquivo.'));
   }
   //
   fileExtension = this.cronapi.json.getProperty(fileData, 'fileExtension');
@@ -88,7 +93,7 @@ window.blockly.js.blockly.productEntry.UploadSheet.validate = async function(fil
     //
     isValid = false;
     //
-    this.cronapi.screen.notify('error','Você deve enviar uma planilha de extensão .csv');
+    this.cronapi.util.throwException(this.cronapi.util.createException('Você deve enviar uma planilha de extensão .csv'));
   }
   return isValid;
 }
@@ -100,12 +105,12 @@ window.blockly.js.blockly.productEntry.UploadSheet.validate = async function(fil
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 09:11:23
+ * @since 26/05/2025, 14:37:53
  *
  */
 window.blockly.js.blockly.productEntry.UploadSheet.openModalArgs = [];
 window.blockly.js.blockly.productEntry.UploadSheet.openModal = async function() {
-
+ var fileJson, e, serverResponse;
   //
   this.cronapi.screen.changeValueOfField("vars.excelFileToUpload", '');
   //
@@ -119,12 +124,12 @@ window.blockly.js.blockly.productEntry.UploadSheet.openModal = async function() 
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 09:11:23
+ * @since 26/05/2025, 14:37:53
  *
  */
 window.blockly.js.blockly.productEntry.UploadSheet.closeModalArgs = [];
 window.blockly.js.blockly.productEntry.UploadSheet.closeModal = async function() {
-
+ var fileJson, e, serverResponse;
   //
   this.cronapi.screen.hideModal("modaUploadSheet");
   //
