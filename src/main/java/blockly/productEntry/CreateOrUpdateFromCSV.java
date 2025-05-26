@@ -19,21 +19,21 @@ public static final int TIMEOUT = 300;
  * @param productEntriesOnDB
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 19/05/2025, 15:24:18
+ * @since 26/05/2025, 14:37:26
  *
  */
 public static Var checkIfHasChanged(@ParamMetaData(description = "productEntry", id = "049a1ba5") @RequestBody(required = false) Var productEntry, @ParamMetaData(description = "productEntriesOnDB", id = "ace0b07d") Var productEntriesOnDB) throws Exception {
  return new Callable<Var>() {
 
+   private Var productEntryOnDb = Var.VAR_NULL;
    private Var status = Var.VAR_NULL;
-   private Var productEntryOnDB = Var.VAR_NULL;
    private Var productChanged = Var.VAR_NULL;
    private Var amountChanged = Var.VAR_NULL;
 
    public Var call() throws Exception {
     status =
     Var.VAR_FALSE;
-    productEntryOnDB =
+    productEntryOnDb =
     cronapi.list.Operations.get(productEntriesOnDB,
     cronapi.list.Operations.findFirst(productEntriesOnDB, productEntry));
     productChanged =
@@ -43,14 +43,14 @@ public static Var checkIfHasChanged(@ParamMetaData(description = "productEntry",
     Var.valueOf("product")),
     Var.valueOf("id")).equals(
     cronapi.json.Operations.getJsonOrMapField(
-    cronapi.json.Operations.getJsonOrMapField(productEntryOnDB,
+    cronapi.json.Operations.getJsonOrMapField(productEntryOnDb,
     Var.valueOf("product")),
     Var.valueOf("id"))));
     amountChanged =
     Var.valueOf(!
     cronapi.json.Operations.getJsonOrMapField(productEntry,
     Var.valueOf("amount")).equals(
-    cronapi.json.Operations.getJsonOrMapField(productEntryOnDB,
+    cronapi.json.Operations.getJsonOrMapField(productEntryOnDb,
     Var.valueOf("amount"))));
     if (
     Var.valueOf(productChanged.getObjectAsBoolean() || amountChanged.getObjectAsBoolean()).getObjectAsBoolean()) {
@@ -67,24 +67,24 @@ public static Var checkIfHasChanged(@ParamMetaData(description = "productEntry",
  * @param productEntriesList
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 19/05/2025, 15:24:18
+ * @since 26/05/2025, 14:37:26
  *
  */
-public static Var manage(@ParamMetaData(description = "productEntriesList", id = "cd44578b") @RequestBody(required = false) Var productEntriesList) throws Exception {
- return new Callable<Var>() {
+public static void manage(@ParamMetaData(description = "productEntriesList", id = "cd44578b") @RequestBody(required = false) Var productEntriesList) throws Exception {
+  new Callable<Var>() {
 
-   private Var productEntryOnDB = Var.VAR_NULL;
-   private Var productEntry = Var.VAR_NULL;
    private Var productEntriesOnDB = Var.VAR_NULL;
    private Var productEntriesIds = Var.VAR_NULL;
+   private Var productEntry = Var.VAR_NULL;
+   private Var productEntryOnDb = Var.VAR_NULL;
    private Var e = Var.VAR_NULL;
 
    public Var call() throws Exception {
     try {
          productEntriesOnDB =
-        cronapi.database.Operations.query(Var.valueOf("app.entity.ProductEntry"),Var.valueOf("select \n	pe \nfrom \n	ProductEntry pe"));
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productEntry.GetProductEntry:getAll"));
         productEntriesIds =
-        cronapi.database.Operations.query(Var.valueOf("app.entity.ProductEntry"),Var.valueOf("select \n	pe.id \nfrom \n	ProductEntry pe"));
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productEntry.GetProductEntry:getEveryId"));
         for (Iterator it_productEntry = productEntriesList.iterator(); it_productEntry.hasNext();) {
             productEntry = Var.valueOf(it_productEntry.next());
             if (
@@ -95,22 +95,19 @@ public static Var manage(@ParamMetaData(description = "productEntriesList", id =
             Var.valueOf(0))).getObjectAsBoolean()) {
                 if (
                 Var.valueOf(checkIfHasChanged(productEntry, productEntriesOnDB)).getObjectAsBoolean()) {
-                    productEntryOnDB =
                     cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productEntry.UpdateProductEntry:update"), Var.valueOf("6bd31f73", productEntry));
                 }
             } else {
                 // Quanto a consulta na lista retornar 0, indica que não há naquela lista o elemento procurado
-                productEntryOnDB =
+                productEntryOnDb =
                 cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productEntry.AddProductEntry:saveFromCSV"), Var.valueOf("ce3ae7bf", productEntry));
             }
         } // end for
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
-         cronapi.util.Operations.throwException(
-        cronapi.util.Operations.createException(
-        Var.valueOf("Erro ao gerenciar o processo de criação/atualização de entradas a partir do csv")));
+         cronapi.util.Operations.throwException(e);
      }
-    return Var.VAR_NULL;
+   return Var.VAR_NULL;
    }
  }.call();
 }
