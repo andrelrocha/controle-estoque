@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 14:31:25
+ * @since 26/05/2025, 15:09:23
  *
  */
 public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
@@ -66,7 +66,7 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 14:31:25
+ * @since 26/05/2025, 15:09:23
  *
  */
 public static Var saveFromCSV(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
