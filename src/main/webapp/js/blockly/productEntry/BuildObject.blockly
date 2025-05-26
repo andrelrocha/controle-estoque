@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><blockly audit="false" blocklyType="WEB" bpmnAble="false" formTarget="src/main/webapp/views/logged/funcionario/entradaprodutos.view.html" functionCategory="" linkHelp="" multilayer="false" resourceType="JS" ruleDescription="BuildObject" ruleName="BuildObject" ruleSynchronous="false" ruleTimeout="" ruleType="I" showAsFunction="false" soap="false" swagger="false">
-  <metadata scale="1" scrollx="287.59999694824205" scrolly="-294.4999999999997" target="GyTP3LUUw8g^}7nClOIh"/>
+  <metadata scale="1" scrollx="344.9" scrolly="-242.09999999999997" target="Anb:u5+^,0vLkL9QIqn5"/>
   <block asynccall="false" colour="#995ba5" datasourcetype="" id="Anb:u5+^,0vLkL9QIqn5" origintype="procedures_defreturn" output="false" score="9007199254740991" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" valueconstant="" x="-244" y="194">
     <field customattributes="" name="NAME">buildAddProjectEntry</field>
     <statement name="STACK">
@@ -46,7 +46,7 @@
                 </value>
                 <value name="ARG1">
                   <shadow asynccall="false" colour="#5ba593" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="5M[dOv`=k|,A6nPxp6-i" origintype="text" output="true" score="9007199254740991" tooltip="function () { [native code] }" type="text" valueconstant="">
-                    <field customattributes="" name="TEXT">product_id</field>
+                    <field customattributes="" name="TEXT">product</field>
                   </shadow>
                 </value>
                 <value name="ARG2">

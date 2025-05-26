@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 12:52:12
+ * @since 26/05/2025, 11:00:20
  *
  */
 public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
@@ -26,6 +26,7 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
    private Var user = Var.VAR_NULL;
    private Var product = Var.VAR_NULL;
    private Var productEntryOnDB = Var.VAR_NULL;
+   private Var response = Var.VAR_NULL;
    private Var e = Var.VAR_NULL;
 
    public Var call() throws Exception {
@@ -35,7 +36,7 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
         product =
         cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.GetProduct:getEntity"), Var.valueOf("cbd6ae39",
         cronapi.json.Operations.getJsonOrMapField(data,
-        Var.valueOf("product_id"))));
+        Var.valueOf("product"))));
         productEntryOnDB =
         cronapi.database.Operations.insert(Var.valueOf("app.entity.ProductEntry"),Var.valueOf("amount",
         cronapi.json.Operations.getJsonOrMapField(data,
@@ -44,12 +45,18 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
         cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.UpdateProduct:updateAmountAfterEntry"), Var.valueOf("63c5ce49", product), Var.valueOf("49cb6752",
         cronapi.json.Operations.getJsonOrMapField(data,
         Var.valueOf("amount"))));
+        response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_TRUE) , Var.valueOf("message",
+        Var.valueOf("Entrada adicionada com sucesso no sistema!")));
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
-         cronapi.util.Operations.throwException(
-        cronapi.util.Operations.getExceptionMessage(e));
+         response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_FALSE) , Var.valueOf("message",
+        cronapi.util.Operations.getExceptionMessage(e)));
      }
-    return productEntryOnDB;
+    return response;
    }
  }.call();
 }
@@ -59,7 +66,7 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 12:52:12
+ * @since 26/05/2025, 11:00:20
  *
  */
 public static Var saveFromCSV(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
