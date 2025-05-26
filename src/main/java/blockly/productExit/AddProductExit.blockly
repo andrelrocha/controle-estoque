@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><blockly audit="false" blocklyType="JAVA" bpmnAble="false" formTarget="" functionCategory="" linkHelp="" multilayer="false" resourceType="JAVA" ruleDescription="AddProductEntry" ruleName="AddProductEntry" ruleSecurity="{&quot;post&quot;:&quot;Funcionario&quot;,&quot;get&quot;:&quot;Funcionario&quot;,&quot;execute&quot;:&quot;Funcionario&quot;,&quot;delete&quot;:&quot;Funcionario&quot;,&quot;put&quot;:&quot;Funcionario&quot;}" ruleSynchronous="false" ruleTimeout="300" ruleType="I" showAsFunction="false" soap="false" swagger="false">
-  <metadata scale="0.8333333333333334" scrollx="41.33334922790527" scrolly="-809.3333435058576" target="PPaIV@_ez~,*ti$l4BJH"/>
-  <block asynccall="false" colour="#995ba5" datasourcetype="" id="Anb:u5+^,0vLkL9QIqn5" origintype="procedures_defreturn" output="false" score="9007199254740991" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" valueconstant="" x="-350" y="130">
+  <metadata scale="0.8333333333333334" scrollx="275.8666666666669" scrolly="-371.53333333333194" target="Anb:u5+^,0vLkL9QIqn5"/>
+  <block asynccall="false" colour="#995ba5" datasourcetype="" id="Anb:u5+^,0vLkL9QIqn5" origintype="procedures_defreturn" output="false" score="9007199254740991" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" valueconstant="" x="-217" y="188">
     <mutation>
       <arg id="ce3ae7bf" name="data"/>
     </mutation>
@@ -37,7 +37,7 @@
                         </value>
                         <value name="ARG1">
                           <shadow asynccall="false" colour="#5ba593" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="d#1l%A!(2[j6N-U5_D4t" origintype="text" output="true" score="9007199254740991" tooltip="function () { [native code] }" type="text" valueconstant="">
-                            <field customattributes="" name="TEXT">product_id</field>
+                            <field customattributes="" name="TEXT">product</field>
                           </shadow>
                         </value>
                       </block>
@@ -163,13 +163,6 @@
         </statement>
       </block>
     </statement>
-  </block>
-  <block asynccall="false" colour="#5ba58c" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="Hi?FY/8bmD~)$wFFzbU!" origintype="text_print" output="false" score="9007199254740991" tooltip="Imprime o texto, número ou valor especificado." type="text_print" valueconstant="" x="-262" y="503">
-    <value name="TEXT">
-      <shadow asynccall="false" colour="#5ba593" datasourcetype="" dependencyby="Anb:u5+^,0vLkL9QIqn5" id="2s)O)U(=*rO#@u0wiV=%" origintype="text" output="true" score="9007199254740991" tooltip="function () { [native code] }" type="text" valueconstant="">
-        <field customattributes="" name="TEXT">4</field>
-      </shadow>
-    </value>
   </block>
   <block asynccall="false" colour="#995ba5" datasourcetype="" id="PPaIV@_ez~,*ti$l4BJH" origintype="procedures_defreturn" output="false" score="9007199254740991" tooltip="Cria uma função que possui um valor de retorno." type="procedures_defreturn" valueconstant="" x="-7" y="518">
     <mutation>
