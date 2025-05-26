@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 11:40:32
+ * @since 26/05/2025, 10:55:27
  *
  */
 public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @RequestBody(required = false) Var data) throws Exception {
@@ -29,6 +29,7 @@ public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @
    private Var newEntryAmount = Var.VAR_NULL;
    private Var oldEntryAmount = Var.VAR_NULL;
    private Var amountDifference = Var.VAR_NULL;
+   private Var response = Var.VAR_NULL;
    private Var e = Var.VAR_NULL;
 
    public Var call() throws Exception {
@@ -46,10 +47,8 @@ public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @
                 Var.valueOf("Não foi encontrada uma entrada com o id informado.")));
             }
             productId =
-            cronapi.json.Operations.getJsonOrMapField(
             cronapi.json.Operations.getJsonOrMapField(data,
-            Var.valueOf("product")),
-            Var.valueOf("id"));
+            Var.valueOf("product"));
             productAmount =
             cronapi.database.Operations.getField(productEntry,
             Var.valueOf("this[0].product.amount"));
@@ -66,12 +65,19 @@ public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @
             cronapi.database.Operations.execute(Var.valueOf("app.entity.ProductEntry"), Var.valueOf("update \n	ProductEntry  \nset \n	product = :product, \n	amount = :amount \nwhere \n	id = :id"),Var.valueOf("product",productId),Var.valueOf("amount",newEntryAmount),Var.valueOf("id",
             cronapi.database.Operations.getField(productEntry,
             Var.valueOf("this[0].id"))));
+            response =
+            cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+            Var.VAR_TRUE) , Var.valueOf("message",
+            Var.valueOf("Entrada atualizada com sucesso no sistema!")));
         }
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
-         cronapi.util.Operations.throwException(e);
+         response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_FALSE) , Var.valueOf("message",
+        cronapi.util.Operations.getExceptionMessage(e)));
      }
-    return Var.VAR_NULL;
+    return response;
    }
  }.call();
 }
@@ -81,7 +87,7 @@ public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 11:40:32
+ * @since 26/05/2025, 10:55:27
  *
  */
 public static Var validateJsonFields(@ParamMetaData(description = "data", id = "aa7efe5a") @RequestBody(required = false) Var data) throws Exception {
@@ -115,10 +121,8 @@ public static Var validateJsonFields(@ParamMetaData(description = "data", id = "
         Var.valueOf("Foi passado um valor vazio como nova quantidade na atualização de entrada.")));
     }
     productId =
-    cronapi.json.Operations.getJsonOrMapField(
     cronapi.json.Operations.getJsonOrMapField(data,
-    Var.valueOf("product")),
-    Var.valueOf("id"));
+    Var.valueOf("product"));
     if (
     cronapi.logic.Operations.isNullOrEmpty(productId).getObjectAsBoolean()) {
         status =

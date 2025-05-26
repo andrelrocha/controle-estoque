@@ -11,12 +11,12 @@ window.blockly.js.blockly.productEntry.BuildObject = window.blockly.js.blockly.p
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 10:28:55
+ * @since 26/05/2025, 10:43:20
  *
  */
 window.blockly.js.blockly.productEntry.BuildObject.buildAddProjectEntryArgs = [];
 window.blockly.js.blockly.productEntry.BuildObject.buildAddProjectEntry = async function() {
- var data;
+ var id, data;
   //
   data = this.cronapi.json.createObjectFromString('{}');
   //
@@ -39,18 +39,18 @@ window.blockly.js.blockly.productEntry.BuildObject.buildAddProjectEntry = async 
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 10:28:55
+ * @since 26/05/2025, 10:43:20
  *
  */
 window.blockly.js.blockly.productEntry.BuildObject.buildUpdateProjectEntryArgs = [];
 window.blockly.js.blockly.productEntry.BuildObject.buildUpdateProjectEntry = async function() {
- var data;
+ var id, data;
   //
   data = this.cronapi.json.createObjectFromString('{}');
   //
   if ((await this.cronapi.client('blockly.js.blockly.productEntry.BuildObject.validateFields').run(true))) {
     //
-    this.cronapi.json.setProperty(data, 'product_id', this.cronapi.screen.getValueOfField("ProductEntry.active.product"));
+    this.cronapi.json.setProperty(data, 'product', this.cronapi.screen.getValueOfField("ProductEntry.active.product"));
     //
     this.cronapi.json.setProperty(data, 'amount', this.cronapi.screen.getValueOfField("ProductEntry.active.amount"));
     //
@@ -72,12 +72,12 @@ window.blockly.js.blockly.productEntry.BuildObject.buildUpdateProjectEntry = asy
  * @param edit
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 10:28:55
+ * @since 26/05/2025, 10:43:20
  *
  */
 window.blockly.js.blockly.productEntry.BuildObject.validateFieldsArgs = [{ description: 'edit', id: 'd402b022' }];
 window.blockly.js.blockly.productEntry.BuildObject.validateFields = async function(edit) {
-
+ var id;
   //
   status2 = true;
   //
