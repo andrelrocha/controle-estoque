@@ -11,7 +11,7 @@ window.blockly.js.blockly.productEntry.UpdateProductEntry = window.blockly.js.bl
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 10:55:28
+ * @since 26/05/2025, 13:59:06
  *
  */
 window.blockly.js.blockly.productEntry.UpdateProductEntry.updateArgs = [];
@@ -24,7 +24,7 @@ window.blockly.js.blockly.productEntry.UpdateProductEntry.update = async functio
     //
     if (!this.cronapi.logic.isNullOrEmpty(objData)) {
       //
-      this.cronapi.util.callServerBlocklyAsynchronous('blockly.productEntry.UpdateProductEntry:update', async function(sender_serverResponse) {
+      this.cronapi.util.callServerBlocklyAsynchronous('blockly.productEntry.UpdateProductEntry:manageUpdate', async function(sender_serverResponse) {
           serverResponse = sender_serverResponse;
         //
         if (this.cronapi.json.getProperty(serverResponse, 'success')) {

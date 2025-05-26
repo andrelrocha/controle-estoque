@@ -19,7 +19,7 @@ public static final int TIMEOUT = 300;
  * @param productEntriesOnDB
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 19/05/2025, 15:24:18
+ * @since 26/05/2025, 13:58:14
  *
  */
 public static Var checkIfHasChanged(@ParamMetaData(description = "productEntry", id = "049a1ba5") @RequestBody(required = false) Var productEntry, @ParamMetaData(description = "productEntriesOnDB", id = "ace0b07d") Var productEntriesOnDB) throws Exception {
@@ -67,7 +67,7 @@ public static Var checkIfHasChanged(@ParamMetaData(description = "productEntry",
  * @param productEntriesList
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 19/05/2025, 15:24:18
+ * @since 26/05/2025, 13:58:14
  *
  */
 public static Var manage(@ParamMetaData(description = "productEntriesList", id = "cd44578b") @RequestBody(required = false) Var productEntriesList) throws Exception {
@@ -82,9 +82,9 @@ public static Var manage(@ParamMetaData(description = "productEntriesList", id =
    public Var call() throws Exception {
     try {
          productEntriesOnDB =
-        cronapi.database.Operations.query(Var.valueOf("app.entity.ProductEntry"),Var.valueOf("select \n	pe \nfrom \n	ProductEntry pe"));
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productEntry.GetProductEntry:getAll"));
         productEntriesIds =
-        cronapi.database.Operations.query(Var.valueOf("app.entity.ProductEntry"),Var.valueOf("select \n	pe.id \nfrom \n	ProductEntry pe"));
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productEntry.GetProductEntry:getEveryId"));
         for (Iterator it_productEntry = productEntriesList.iterator(); it_productEntry.hasNext();) {
             productEntry = Var.valueOf(it_productEntry.next());
             if (
@@ -95,8 +95,8 @@ public static Var manage(@ParamMetaData(description = "productEntriesList", id =
             Var.valueOf(0))).getObjectAsBoolean()) {
                 if (
                 Var.valueOf(checkIfHasChanged(productEntry, productEntriesOnDB)).getObjectAsBoolean()) {
-                    productEntryOnDB =
-                    cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productEntry.UpdateProductEntry:update"), Var.valueOf("6bd31f73", productEntry));
+                    cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productEntry.UpdateProductEntry:update"), Var.valueOf("6bd31f73",
+                    cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productEntry.UpdateProductEntry:update"), Var.valueOf("6bd31f73", productEntry))));
                 }
             } else {
                 // Quanto a consulta na lista retornar 0, indica que não há naquela lista o elemento procurado
@@ -106,9 +106,7 @@ public static Var manage(@ParamMetaData(description = "productEntriesList", id =
         } // end for
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
-         cronapi.util.Operations.throwException(
-        cronapi.util.Operations.createException(
-        Var.valueOf("Erro ao gerenciar o processo de criação/atualização de entradas a partir do csv")));
+         cronapi.util.Operations.throwException(e);
      }
     return Var.VAR_NULL;
    }
