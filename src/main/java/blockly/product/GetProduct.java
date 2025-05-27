@@ -15,7 +15,7 @@ public static final int TIMEOUT = 300;
 /**
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 27/05/2025, 11:59:59
+ * @since 27/05/2025, 13:00:53
  *
  */
 public static Var getAll() throws Exception {
@@ -42,7 +42,7 @@ public static Var getAll() throws Exception {
 /**
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 27/05/2025, 11:59:59
+ * @since 27/05/2025, 13:00:53
  *
  */
 public static Var getAllNames() throws Exception {
@@ -71,7 +71,7 @@ public static Var getAllNames() throws Exception {
  * @param productId
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 27/05/2025, 11:59:59
+ * @since 27/05/2025, 13:00:53
  *
  */
 public static Var getById(@ParamMetaData(description = "productId", id = "cbd6ae39") @RequestBody(required = false) Var productId) throws Exception {
@@ -111,7 +111,7 @@ cronapi.list.Operations.getFirst(product);
  * @param productId
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 27/05/2025, 11:59:59
+ * @since 27/05/2025, 13:00:53
  *
  */
 public static Var getEntity(@ParamMetaData(description = "productId", id = "cbd6ae39") @RequestBody(required = false) Var productId) throws Exception {
@@ -141,6 +141,33 @@ public static Var getEntity(@ParamMetaData(description = "productId", id = "cbd6
          cronapi.util.Operations.throwException(e);
      }
     return product;
+   }
+ }.call();
+}
+
+/**
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 27/05/2025, 13:00:53
+ *
+ */
+public static Var getEveryId() throws Exception {
+ return new Callable<Var>() {
+
+   private Var e = Var.VAR_NULL;
+   private Var productIds = Var.VAR_NULL;
+
+   public Var call() throws Exception {
+    try {
+         productIds =
+        cronapi.database.Operations.query(Var.valueOf("app.entity.Product"),Var.valueOf("select \n	p.id \nfrom \n	Product p"));
+     } catch (Exception e_exception) {
+          e = Var.valueOf(e_exception);
+         cronapi.util.Operations.throwException(
+        cronapi.util.Operations.createException(
+        Var.valueOf("Erro ao obter todos os IDs dos produtos do sistema.")));
+     }
+    return productIds;
    }
  }.call();
 }

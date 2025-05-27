@@ -11,35 +11,33 @@ window.blockly.js.blockly.product.UploadSheet = window.blockly.js.blockly.produc
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 08:51:54
+ * @since 27/05/2025, 12:55:28
  *
  */
 window.blockly.js.blockly.product.UploadSheet.readAndConvertArgs = [];
 window.blockly.js.blockly.product.UploadSheet.readAndConvert = async function() {
-
+ var e, fileJson, item, serverResponse;
   //
-  try {
-     //
-    fileJson = (await this.cronapi.client('blockly.js.blockly.product.UploadSheet.buildFileAsJson').run());
+  fileJson = (await this.cronapi.client('blockly.js.blockly.product.UploadSheet.buildFileAsJson').run());
+  //
+  if ((await this.cronapi.client('blockly.js.blockly.product.UploadSheet.validate').run(fileJson))) {
     //
-    if ((await this.cronapi.client('blockly.js.blockly.product.UploadSheet.validate').run(fileJson))) {
+    this.cronapi.util.callServerBlocklyAsynchronous('blockly.product.ConvertProductsOnSheet:handleProductsUpdateProcess', async function(sender_serverResponse) {
+        serverResponse = sender_serverResponse;
       //
-      this.cronapi.util.callServerBlocklyAsynchronous('blockly.product.ConvertProductsOnSheet:handleProductsUpdateProcess', async function(sender_item) {
-          item = sender_item;
+      if (this.cronapi.json.getProperty(serverResponse, 'success')) {
+        //
+        this.cronapi.screen.notify('success',this.cronapi.json.getProperty(serverResponse, 'message'));
         //
         this.cronapi.screen.refreshDatasource("Product", 'true');
         //
         (await this.cronapi.client('blockly.js.blockly.product.UploadSheet.closeModal').run());
-      }.bind(this), fileJson);
-    } else {
-      //
-      this.cronapi.util.throwException(this.cronapi.util.createException('Erro ao ler a planilha com os produtos atualizados.'));
-    }
-   } catch (e_exception) {
-        e = e_exception;
-     //
-    this.cronapi.util.throwException(e);
-   }
+      } else {
+        //
+        this.cronapi.screen.notify('error',this.cronapi.json.getProperty(serverResponse, 'message'));
+      }
+    }.bind(this), fileJson);
+  }
 }
 
 /**
@@ -49,12 +47,12 @@ window.blockly.js.blockly.product.UploadSheet.readAndConvert = async function() 
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 08:51:54
+ * @since 27/05/2025, 12:55:28
  *
  */
 window.blockly.js.blockly.product.UploadSheet.buildFileAsJsonArgs = [];
 window.blockly.js.blockly.product.UploadSheet.buildFileAsJson = async function() {
-
+ var e, fileJson, item, serverResponse;
   return this.cronapi.json.createObjectFromString(this.cronapi.screen.getValueOfField("vars.excelFileToUpload"));
 }
 
@@ -66,12 +64,12 @@ window.blockly.js.blockly.product.UploadSheet.buildFileAsJson = async function()
  * @param fileData
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 08:51:54
+ * @since 27/05/2025, 12:55:28
  *
  */
 window.blockly.js.blockly.product.UploadSheet.validateArgs = [{ description: 'fileData', id: 'b1d364dc' }];
 window.blockly.js.blockly.product.UploadSheet.validate = async function(fileData) {
-
+ var e, fileJson, item;
   //
   isValid = true;
   //
@@ -100,12 +98,12 @@ window.blockly.js.blockly.product.UploadSheet.validate = async function(fileData
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 08:51:54
+ * @since 27/05/2025, 12:55:28
  *
  */
 window.blockly.js.blockly.product.UploadSheet.openModalArgs = [];
 window.blockly.js.blockly.product.UploadSheet.openModal = async function() {
-
+ var e, fileJson, item, serverResponse;
   //
   this.cronapi.screen.changeValueOfField("vars.excelFileToUpload", '');
   //
@@ -119,12 +117,12 @@ window.blockly.js.blockly.product.UploadSheet.openModal = async function() {
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 08:51:54
+ * @since 27/05/2025, 12:55:28
  *
  */
 window.blockly.js.blockly.product.UploadSheet.closeModalArgs = [];
 window.blockly.js.blockly.product.UploadSheet.closeModal = async function() {
-
+ var e, fileJson, item, serverResponse;
   //
   this.cronapi.screen.hideModal("modalUploadSheet");
   //
