@@ -14,17 +14,51 @@ public static final int TIMEOUT = 300;
 
 /**
  *
+ * @param data
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 27/05/2025, 12:48:52
+ *
+ */
+public static Var manageUpdateFromJSON(@ParamMetaData(description = "data", id = "2cc85c57") @RequestBody(required = false) Var data) throws Exception {
+ return new Callable<Var>() {
+
+   private Var e = Var.VAR_NULL;
+   private Var response = Var.VAR_NULL;
+
+   public Var call() throws Exception {
+    try {
+         updateFromJSON(data);
+        response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_TRUE) , Var.valueOf("message",
+        Var.valueOf("Produto atualizado com sucesso no sistema!")));
+     } catch (Exception e_exception) {
+          e = Var.valueOf(e_exception);
+         response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_FALSE) , Var.valueOf("message",
+        cronapi.util.Operations.getExceptionMessage(e)));
+     }
+    return response;
+   }
+ }.call();
+}
+
+/**
+ *
  * @param id
  * @param newAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 27/05/2025, 12:48:52
  *
  */
 public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "newAmount", id = "6e06289c") Var newAmount) throws Exception {
   new Callable<Var>() {
 
    private Var e = Var.VAR_NULL;
+   private Var auditMessage = Var.VAR_NULL;
 
    public Var call() throws Exception {
     try {
@@ -42,6 +76,17 @@ public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf8
             Var.valueOf("Não pode ser passado um valor negativo como nova quantidade de um produto..")));
         }
         cronapi.database.Operations.execute(Var.valueOf("app.entity.Product"), Var.valueOf("update \n	Product  \nset \n	amount = :amount \nwhere \n	id = :id"),Var.valueOf("amount",newAmount),Var.valueOf("id",id2));
+        auditMessage =
+        Var.valueOf(
+        cronapi.util.Operations.getCurrentUserName().getObjectAsString() +
+        Var.valueOf(" updated ").getObjectAsString() +
+        cronapi.database.Operations.query(Var.valueOf("app.entity.Product"),Var.valueOf("select \n	p.name \nfrom \n	Product p  \nwhere \n	p.id = :id"),Var.valueOf("id",id2)).getObjectAsString() +
+        Var.valueOf(" to a new amount: ").getObjectAsString() +
+        newAmount.getObjectAsString());
+        cronapi.util.Operations.audit(
+        Var.valueOf("blockly.product.UpdateProduct"),
+        Var.valueOf("Updating Product amount"),
+        Var.valueOf("Blockly"), auditMessage);
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
          cronapi.util.Operations.throwException(e);
@@ -57,7 +102,7 @@ public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf8
  * @param entryAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 27/05/2025, 12:48:52
  *
  */
 public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "entryAmount", id = "49cb6752") Var entryAmount) throws Exception {
@@ -105,7 +150,7 @@ public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 27/05/2025, 12:48:52
  *
  */
 public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -144,7 +189,7 @@ public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id
  * @param exitAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 27/05/2025, 12:48:52
  *
  */
 public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "exitAmount", id = "49cb6752") Var exitAmount) throws Exception {
@@ -168,22 +213,12 @@ public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_
             cronapi.util.Operations.createException(
             Var.valueOf("A quantidade de produtos retirados deve ser de pelo menos 1.")));
         }
-        System.out.println(
-        Var.valueOf("CHAMOU NO UPDATE APÓS EXCCEÇÕES").getObjectAsString());
         oldAmount =
         cronapi.list.Operations.getFirst((
         cronapi.database.Operations.getColumn(Consulta_a_Entidades,
         Var.valueOf("amount"))));
-        System.out.println(
-        Var.valueOf("OLD AMOUNT: ").getObjectAsString());
-        System.out.println(oldAmount.getObjectAsString());
         if (
         Var.valueOf(exitAmount.compareTo(oldAmount) > 0).getObjectAsBoolean()) {
-            System.out.println(
-            Var.valueOf(
-            Var.valueOf("O Usuário está tentando retirar mais itens do que há no estoque. ").getObjectAsString() +
-            Var.valueOf("Quantidade em estoque: ").getObjectAsString() +
-            oldAmount.getObjectAsString()).getObjectAsString());
             cronapi.util.Operations.throwException(
             cronapi.util.Operations.createException(
             Var.valueOf(
@@ -199,9 +234,7 @@ public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_
         }
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
-         System.out.println(
-        Var.valueOf("EXCEÇÃO FOI LANÇADA").getObjectAsString());
-        cronapi.util.Operations.throwException(e);
+         cronapi.util.Operations.throwException(e);
      }
     return Consulta_a_Entidades;
    }
@@ -214,7 +247,7 @@ public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 27/05/2025, 12:48:52
  *
  */
 public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -252,16 +285,15 @@ public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 27/05/2025, 12:48:52
  *
  */
-public static Var updateFromJSON(@ParamMetaData(description = "param_data", id = "2cc85c57") @RequestBody(required = false) Var param_data) throws Exception {
- return new Callable<Var>() {
+public static void updateFromJSON(@ParamMetaData(description = "data", id = "2cc85c57") @RequestBody(required = false) Var data) throws Exception {
+  new Callable<Var>() {
 
-   // param
-   private Var data = param_data;
-   // end
    private Var e = Var.VAR_NULL;
+   private Var auditMessage = Var.VAR_NULL;
+   private Var updatedProduct = Var.VAR_NULL;
 
    public Var call() throws Exception {
     try {
@@ -278,9 +310,22 @@ public static Var updateFromJSON(@ParamMetaData(description = "param_data", id =
             Var.valueOf("name"))),Var.valueOf("id",
             cronapi.json.Operations.getJsonOrMapField(data,
             Var.valueOf("id"))));
-        } else {
-            data =
-            Var.VAR_NULL;
+            updatedProduct =
+            cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.GetProduct:getById"), Var.valueOf("cbd6ae39",
+            cronapi.json.Operations.getJsonOrMapField(data,
+            Var.valueOf("id"))));
+            auditMessage =
+            Var.valueOf(
+            cronapi.util.Operations.getCurrentUserName().getObjectAsString() +
+            Var.valueOf(" updated ").getObjectAsString() +
+            cronapi.json.Operations.getJsonOrMapField(updatedProduct,
+            Var.valueOf("name")).getObjectAsString() +
+            Var.valueOf(": ").getObjectAsString() +
+            cronapi.conversion.Operations.toString(updatedProduct).getObjectAsString());
+            cronapi.util.Operations.audit(
+            Var.valueOf("blockly.product.UpdateProduct"),
+            Var.valueOf("Updating Product from JSON"),
+            Var.valueOf("Blockly"), auditMessage);
         }
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
@@ -288,7 +333,7 @@ public static Var updateFromJSON(@ParamMetaData(description = "param_data", id =
         cronapi.util.Operations.createException(
         Var.valueOf("Erro ao atualizar um produto a partir de um JSON.")));
      }
-    return data;
+   return Var.VAR_NULL;
    }
  }.call();
 }
@@ -298,7 +343,7 @@ public static Var updateFromJSON(@ParamMetaData(description = "param_data", id =
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 13:08:12
+ * @since 27/05/2025, 12:48:52
  *
  */
 public static Var validateFields(@ParamMetaData(description = "data", id = "21505d1b") @RequestBody(required = false) Var data) throws Exception {

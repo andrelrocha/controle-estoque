@@ -19,7 +19,7 @@ public static final int TIMEOUT = 300;
  * @param productExitsOnDB
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:27:35
+ * @since 27/05/2025, 11:15:34
  *
  */
 public static Var checkIfHasChanged(@ParamMetaData(description = "productExit", id = "049a1ba5") @RequestBody(required = false) Var productExit, @ParamMetaData(description = "productExitsOnDB", id = "ace0b07d") Var productExitsOnDB) throws Exception {
@@ -67,11 +67,11 @@ public static Var checkIfHasChanged(@ParamMetaData(description = "productExit", 
  * @param productExitsList
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:27:35
+ * @since 27/05/2025, 11:15:34
  *
  */
-public static Var manage(@ParamMetaData(description = "productExitsList", id = "cd44578b") @RequestBody(required = false) Var productExitsList) throws Exception {
- return new Callable<Var>() {
+public static void manage(@ParamMetaData(description = "productExitsList", id = "cd44578b") @RequestBody(required = false) Var productExitsList) throws Exception {
+  new Callable<Var>() {
 
    private Var productExitOnDB = Var.VAR_NULL;
    private Var productExit = Var.VAR_NULL;
@@ -82,9 +82,9 @@ public static Var manage(@ParamMetaData(description = "productExitsList", id = "
    public Var call() throws Exception {
     try {
          productExitsOnDB =
-        cronapi.database.Operations.query(Var.valueOf("app.entity.ProductExit"),Var.valueOf("select \n	pe \nfrom \n	ProductExit pe"));
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productExit.GetProductExit:getAll"));
         productExitsIds =
-        cronapi.database.Operations.query(Var.valueOf("app.entity.ProductExit"),Var.valueOf("select \n	p.id \nfrom \n	ProductExit p"));
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productExit.GetProductExit:getEveryId"));
         for (Iterator it_productExit = productExitsList.iterator(); it_productExit.hasNext();) {
             productExit = Var.valueOf(it_productExit.next());
             if (
@@ -95,7 +95,6 @@ public static Var manage(@ParamMetaData(description = "productExitsList", id = "
             Var.valueOf(0))).getObjectAsBoolean()) {
                 if (
                 Var.valueOf(checkIfHasChanged(productExit, productExitsOnDB)).getObjectAsBoolean()) {
-                    productExitOnDB =
                     cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productExit.UpdateProductExit:update"), Var.valueOf("6bd31f73", productExit));
                 }
             } else {
@@ -106,11 +105,9 @@ public static Var manage(@ParamMetaData(description = "productExitsList", id = "
         } // end for
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
-         cronapi.util.Operations.throwException(
-        cronapi.util.Operations.createException(
-        Var.valueOf("Erro ao gerenciar o processo de criação/atualização de saídas a partir do csv")));
+         cronapi.util.Operations.throwException(e);
      }
-    return Var.VAR_NULL;
+   return Var.VAR_NULL;
    }
  }.call();
 }

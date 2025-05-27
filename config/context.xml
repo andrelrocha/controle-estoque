@@ -2,10 +2,11 @@
 <Context>
     <Resource accessToUnderlyingConnectionAllowed="true" driverClassName="org.h2.Driver" logAbandoned="true" name="jdbc/main" password="root" profile="DEV" removeAbandoned="false" removeAbandonedTimeout="60" type="javax.sql.DataSource" url="jdbc:h2:file:~/data;AUTO_SERVER=TRUE;MODE=LEGACY" username="root"/>
     <Resource accessToUnderlyingConnectionAllowed="false" cloudDatabaseKey="" driverClassName="org.postgresql.Driver" logAbandoned="true" name="jdbc/ControleEstoquePG" password="andrebar" profile="DEV" removeAbandoned="false" removeAbandonedTimeout="60" schema="dev" type="javax.sql.DataSource" url="jdbc:postgresql://0.tcp.sa.ngrok.io:11894/controle-estoque?charSet=UTF-8&amp;currentSchema=dev" username="andrerocha"/>
-    <Profile value="DEV"/>
-    <Profile value="PROD"/>
     <Parameter name="email" value="naoresponda@cronapp.io"/>
     <Parameter name="passwordEmail" value="Wat814422"/>
     <Parameter name="emailPorta" value="587"/>
     <Parameter name="emailSmtp" value="smtp.office365.com"/>
+    <Profile value="DEV"/>
+    <Profile value="PROD"/>
+    <Resource accessToUnderlyingConnectionAllowed="false" cloudDatabaseKey="" driverClassName="com.mysql.jdbc.Driver" logAbandoned="true" name="jdbc/ControleEstoqueDEV" password="ityPERyANticIAMpoRde" profile="DEV" removeAbandoned="false" removeAbandonedTimeout="60" schema="" type="javax.sql.DataSource" url="jdbc:mysql://idepdbarm.cronapp.io:9075/controle_estoque_andre?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC&amp;useSSL=false&amp;allowPublicKeyRetrieval=true" username="fabrica"/>
 </Context>

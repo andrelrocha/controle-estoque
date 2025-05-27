@@ -11,14 +11,22 @@ window.blockly.js.blockly.productEntry.DownloadSheet = window.blockly.js.blockly
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 16/05/2025, 13:09:53
+ * @since 26/05/2025, 14:46:51
  *
  */
 window.blockly.js.blockly.productEntry.DownloadSheet.downloadCsvArgs = [];
 window.blockly.js.blockly.productEntry.DownloadSheet.downloadCsv = async function() {
- var downloadEndpoint, item;
+ var e, serverResponse;
   //
-  this.cronapi.util.callServerBlocklyAsynchronous('blockly.productEntry.ExportSheet:exportCsv', async function(sender_item) {
-      item = sender_item;
+  this.cronapi.util.callServerBlocklyAsynchronous('blockly.productEntry.ExportSheet:exportCsv', async function(sender_serverResponse) {
+      serverResponse = sender_serverResponse;
+    //
+    if (this.cronapi.json.getProperty(serverResponse, 'success')) {
+      //
+      this.cronapi.screen.notify('success',this.cronapi.json.getProperty(serverResponse, 'message'));
+    } else {
+      //
+      this.cronapi.screen.notify('error',this.cronapi.json.getProperty(serverResponse, 'message'));
+    }
   }.bind(this));
 }

@@ -18,7 +18,7 @@ public static final int TIMEOUT = 300;
  * @param product
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 16/05/2025, 12:28:19
+ * @since 27/05/2025, 12:04:48
  *
  */
 public static Var createFromJSON(@ParamMetaData(description = "product", id = "0822b2e3") @RequestBody(required = false) Var product) throws Exception {
@@ -28,12 +28,13 @@ public static Var createFromJSON(@ParamMetaData(description = "product", id = "0
    private Var productIsNotOnDB = Var.VAR_NULL;
    private Var productName = Var.VAR_NULL;
    private Var productOnDB = Var.VAR_NULL;
+   private Var response = Var.VAR_NULL;
    private Var e = Var.VAR_NULL;
 
    public Var call() throws Exception {
     try {
          productsAlreadyOnDB =
-        cronapi.database.Operations.query(Var.valueOf("app.entity.Product"),Var.valueOf("select \n	p.name \nfrom \n	Product p"));
+        cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.GetProduct:getAllNames"));
         productIsNotOnDB =
         Var.VAR_TRUE;
         for (Iterator it_productName = productsAlreadyOnDB.iterator(); it_productName.hasNext();) {
@@ -46,6 +47,7 @@ public static Var createFromJSON(@ParamMetaData(description = "product", id = "0
             Var.valueOf("name"))))).getObjectAsBoolean()) {
                 productIsNotOnDB =
                 Var.VAR_FALSE;
+                break;
             }
         } // end for
         if (productIsNotOnDB.getObjectAsBoolean()) {
@@ -60,17 +62,29 @@ public static Var createFromJSON(@ParamMetaData(description = "product", id = "0
             Var.valueOf("minQuantity"))),Var.valueOf("name",
             cronapi.json.Operations.getJsonOrMapField(product,
             Var.valueOf("name"))));
+            if (
+            cronapi.logic.Operations.isNullOrEmpty(productOnDB).getObjectAsBoolean()) {
+                cronapi.util.Operations.throwException(
+                cronapi.util.Operations.createException(
+                Var.valueOf("Ocorreu um erro ao criar um produto no banco.")));
+            }
+            response =
+            cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+            Var.VAR_TRUE) , Var.valueOf("message",
+            Var.valueOf("Produto adicionado com sucesso no sistema!")));
         } else {
-            productOnDB =
-            cronapi.json.Operations.createObjectJson();
+            cronapi.util.Operations.throwException(
+            cronapi.util.Operations.createException(
+            Var.valueOf("Já existe produto com o nome informado.")));
         }
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
-         cronapi.util.Operations.throwException(
-        cronapi.util.Operations.createException(
-        Var.valueOf("Erro no processo de criação de produto.")));
+         response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_FALSE) , Var.valueOf("message",
+        cronapi.util.Operations.getExceptionMessage(e)));
      }
-    return productOnDB;
+    return response;
    }
  }.call();
 }
