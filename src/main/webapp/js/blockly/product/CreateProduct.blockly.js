@@ -11,35 +11,31 @@ window.blockly.js.blockly.product.CreateProduct = window.blockly.js.blockly.prod
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 12:27:01
+ * @since 27/05/2025, 12:05:50
  *
  */
 window.blockly.js.blockly.product.CreateProduct.runArgs = [];
 window.blockly.js.blockly.product.CreateProduct.run = async function() {
- var objData, e, serverResponse;
+ var e, objData, serverResponse;
   //
-  try {
-     //
-    objData = (await this.cronapi.client('blockly.js.blockly.product.BuildObject.buildCreateProduct').run());
+  objData = (await this.cronapi.client('blockly.js.blockly.product.BuildObject.buildCreateProduct').run());
+  //
+  if (!this.cronapi.logic.isNullOrEmpty(objData)) {
     //
-    if (!this.cronapi.logic.isNullOrEmpty(objData)) {
+    this.cronapi.util.callServerBlocklyAsynchronous('blockly.product.CreateProduct:createFromJSON', async function(sender_serverResponse) {
+        serverResponse = sender_serverResponse;
       //
-      this.cronapi.util.callServerBlocklyAsynchronous('blockly.product.CreateProduct:createFromJSON', async function(sender_serverResponse) {
-          serverResponse = sender_serverResponse;
+      if (this.cronapi.json.getProperty(serverResponse, 'success')) {
         //
-        if (!this.cronapi.logic.isNullOrEmpty(serverResponse)) {
-          //
-          this.cronapi.screen.notify('success','Produto adicionado com sucesso no sistema!');
-          //
-          this.cronapi.screen.refreshDatasource("Product", 'true');
-          //
-          (await this.cronapi.client('blockly.js.blockly.product.ModalHandler.closeAddModal').run());
-        }
-      }.bind(this), objData);
-    }
-   } catch (e_exception) {
-        e = e_exception;
-     //
-    this.cronapi.screen.notify('error',e);
-   }
+        this.cronapi.screen.notify('success',this.cronapi.json.getProperty(serverResponse, 'message'));
+        //
+        this.cronapi.screen.refreshDatasource("Product", 'true');
+        //
+        (await this.cronapi.client('blockly.js.blockly.product.ModalHandler.closeAddModal').run());
+      } else {
+        //
+        this.cronapi.screen.notify('error',this.cronapi.json.getProperty(serverResponse, 'message'));
+      }
+    }.bind(this), objData);
+  }
 }

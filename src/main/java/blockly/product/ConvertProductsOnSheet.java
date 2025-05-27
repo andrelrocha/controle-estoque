@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param fileData
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 10:29:46
+ * @since 27/05/2025, 13:03:13
  *
  */
 public static Var convertFromCsv(@ParamMetaData(description = "fileData", id = "ba10b34b") @RequestBody(required = false) Var fileData) throws Exception {
@@ -106,7 +106,7 @@ public static Var convertFromCsv(@ParamMetaData(description = "fileData", id = "
  * @param fileData
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 21/05/2025, 10:29:46
+ * @since 27/05/2025, 13:03:13
  *
  */
 public static Var handleProductsUpdateProcess(@ParamMetaData(description = "fileData", id = "3b1cb5b6") @RequestBody(required = false) Var fileData) throws Exception {
@@ -120,13 +120,19 @@ public static Var handleProductsUpdateProcess(@ParamMetaData(description = "file
     try {
          productsList =
         Var.valueOf(convertFromCsv(fileData));
-        response =
         cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.CreateOrUpdateFromCSV:manage"), Var.valueOf("cd44578b", productsList));
+        response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_TRUE) , Var.valueOf("message",
+        Var.valueOf("Produtos atualizados com sucesso no sistema a partir do CSV!")));
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
-         cronapi.util.Operations.throwException(e);
+         response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_FALSE) , Var.valueOf("message",
+        cronapi.util.Operations.getExceptionMessage(e)));
      }
-    return Var.VAR_NULL;
+    return response;
    }
  }.call();
 }
