@@ -14,11 +14,44 @@ public static final int TIMEOUT = 300;
 
 /**
  *
+ * @param data
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 27/05/2025, 12:48:52
+ *
+ */
+public static Var manageUpdateFromJSON(@ParamMetaData(description = "data", id = "2cc85c57") @RequestBody(required = false) Var data) throws Exception {
+ return new Callable<Var>() {
+
+   private Var e = Var.VAR_NULL;
+   private Var response = Var.VAR_NULL;
+
+   public Var call() throws Exception {
+    try {
+         updateFromJSON(data);
+        response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_TRUE) , Var.valueOf("message",
+        Var.valueOf("Produto atualizado com sucesso no sistema!")));
+     } catch (Exception e_exception) {
+          e = Var.valueOf(e_exception);
+         response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_FALSE) , Var.valueOf("message",
+        cronapi.util.Operations.getExceptionMessage(e)));
+     }
+    return response;
+   }
+ }.call();
+}
+
+/**
+ *
  * @param id
  * @param newAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 15:14:10
+ * @since 27/05/2025, 12:48:52
  *
  */
 public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "newAmount", id = "6e06289c") Var newAmount) throws Exception {
@@ -69,7 +102,7 @@ public static void updateAmount(@ParamMetaData(description = "id2", id = "322cf8
  * @param entryAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 15:14:10
+ * @since 27/05/2025, 12:48:52
  *
  */
 public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "entryAmount", id = "49cb6752") Var entryAmount) throws Exception {
@@ -117,7 +150,7 @@ public static Var updateAmountAfterEntry(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 15:14:10
+ * @since 27/05/2025, 12:48:52
  *
  */
 public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -156,7 +189,7 @@ public static Var updateAmountBeforeEntryDelete(@ParamMetaData(description = "id
  * @param exitAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 15:14:10
+ * @since 27/05/2025, 12:48:52
  *
  */
 public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_a_Entidades", id = "63c5ce49") @RequestBody(required = false) Var Consulta_a_Entidades, @ParamMetaData(description = "exitAmount", id = "49cb6752") Var exitAmount) throws Exception {
@@ -214,7 +247,7 @@ public static Var updateAmountBeforeExit(@ParamMetaData(description = "Consulta_
  * @param deletedAmount
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 15:14:10
+ * @since 27/05/2025, 12:48:52
  *
  */
 public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2", id = "322cf808") @RequestBody(required = false) Var id2, @ParamMetaData(description = "deletedAmount", id = "6e06289c") Var deletedAmount) throws Exception {
@@ -252,15 +285,12 @@ public static Var updateAmountBeforeExitDelete(@ParamMetaData(description = "id2
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 15:14:10
+ * @since 27/05/2025, 12:48:52
  *
  */
-public static Var updateFromJSON(@ParamMetaData(description = "param_data", id = "2cc85c57") @RequestBody(required = false) Var param_data) throws Exception {
- return new Callable<Var>() {
+public static void updateFromJSON(@ParamMetaData(description = "data", id = "2cc85c57") @RequestBody(required = false) Var data) throws Exception {
+  new Callable<Var>() {
 
-   // param
-   private Var data = param_data;
-   // end
    private Var e = Var.VAR_NULL;
    private Var auditMessage = Var.VAR_NULL;
    private Var updatedProduct = Var.VAR_NULL;
@@ -281,10 +311,9 @@ public static Var updateFromJSON(@ParamMetaData(description = "param_data", id =
             cronapi.json.Operations.getJsonOrMapField(data,
             Var.valueOf("id"))));
             updatedProduct =
-            cronapi.list.Operations.getFirst((
-            cronapi.database.Operations.query(Var.valueOf("app.entity.Product"),Var.valueOf("select \n	p \nfrom \n	Product p  \nwhere \n	p.id = :id"),Var.valueOf("id",
+            cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.GetProduct:getById"), Var.valueOf("cbd6ae39",
             cronapi.json.Operations.getJsonOrMapField(data,
-            Var.valueOf("id"))))));
+            Var.valueOf("id"))));
             auditMessage =
             Var.valueOf(
             cronapi.util.Operations.getCurrentUserName().getObjectAsString() +
@@ -297,9 +326,6 @@ public static Var updateFromJSON(@ParamMetaData(description = "param_data", id =
             Var.valueOf("blockly.product.UpdateProduct"),
             Var.valueOf("Updating Product from JSON"),
             Var.valueOf("Blockly"), auditMessage);
-        } else {
-            data =
-            Var.VAR_NULL;
         }
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
@@ -307,7 +333,7 @@ public static Var updateFromJSON(@ParamMetaData(description = "param_data", id =
         cronapi.util.Operations.createException(
         Var.valueOf("Erro ao atualizar um produto a partir de um JSON.")));
      }
-    return data;
+   return Var.VAR_NULL;
    }
  }.call();
 }
@@ -317,7 +343,7 @@ public static Var updateFromJSON(@ParamMetaData(description = "param_data", id =
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 15:14:10
+ * @since 27/05/2025, 12:48:52
  *
  */
 public static Var validateFields(@ParamMetaData(description = "data", id = "21505d1b") @RequestBody(required = false) Var data) throws Exception {
