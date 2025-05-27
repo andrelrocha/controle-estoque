@@ -17,7 +17,7 @@ public static final int TIMEOUT = 300;
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 15:14:38
+ * @since 27/05/2025, 08:44:42
  *
  */
 public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {
@@ -26,6 +26,7 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
    private Var user = Var.VAR_NULL;
    private Var product = Var.VAR_NULL;
    private Var productExitOnDB = Var.VAR_NULL;
+   private Var response = Var.VAR_NULL;
    private Var e = Var.VAR_NULL;
 
    public Var call() throws Exception {
@@ -44,13 +45,18 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
         cronapi.json.Operations.getJsonOrMapField(data,
         Var.valueOf("amount"))),Var.valueOf("date",
         cronapi.dateTime.Operations.getNow()),Var.valueOf("product",product),Var.valueOf("registeringUser",user));
+        response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_TRUE) , Var.valueOf("message",
+        Var.valueOf("Saída adicionada com sucesso no sistema!")));
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
-         cronapi.util.Operations.throwException(
-        cronapi.util.Operations.createException(
+         response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_FALSE) , Var.valueOf("message",
         cronapi.util.Operations.getExceptionMessage(e)));
      }
-    return Var.VAR_NULL;
+    return response;
    }
  }.call();
 }
@@ -60,7 +66,7 @@ public static Var save(@ParamMetaData(description = "data", id = "ce3ae7bf") @Re
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 15:14:38
+ * @since 27/05/2025, 08:44:42
  *
  */
 public static Var saveFromCSV(@ParamMetaData(description = "data", id = "ce3ae7bf") @RequestBody(required = false) Var data) throws Exception {

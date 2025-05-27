@@ -11,35 +11,33 @@ window.blockly.js.blockly.productExit.UploadSheet = window.blockly.js.blockly.pr
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:22:16
+ * @since 27/05/2025, 11:08:08
  *
  */
 window.blockly.js.blockly.productExit.UploadSheet.readAndConvertArgs = [];
 window.blockly.js.blockly.productExit.UploadSheet.readAndConvert = async function() {
- var fileJson, e, item;
+ var e, fileJson, serverResponse;
   //
-  try {
-     //
-    fileJson = (await this.cronapi.client('blockly.js.blockly.productExit.UploadSheet.buildFileAsJson').run());
+  fileJson = (await this.cronapi.client('blockly.js.blockly.productExit.UploadSheet.buildFileAsJson').run());
+  //
+  if ((await this.cronapi.client('blockly.js.blockly.productExit.UploadSheet.validate').run(fileJson))) {
     //
-    if ((await this.cronapi.client('blockly.js.blockly.productExit.UploadSheet.validate').run(fileJson))) {
+    this.cronapi.util.callServerBlocklyAsynchronous('blockly.productExit.ConvertProductExitsOnSheet:handleProductsExitsUpdateProcess', async function(sender_serverResponse) {
+        serverResponse = sender_serverResponse;
       //
-      this.cronapi.util.callServerBlocklyAsynchronous('blockly.productExit.ConvertProductExitsOnSheet:handleProductsExitsUpdateProcess', async function(sender_item) {
-          item = sender_item;
+      if (this.cronapi.json.getProperty(serverResponse, 'success')) {
+        //
+        this.cronapi.screen.notify('success',this.cronapi.json.getProperty(serverResponse, 'message'));
         //
         this.cronapi.screen.refreshDatasource("ProductExit", 'true');
         //
         (await this.cronapi.client('blockly.js.blockly.productExit.UploadSheet.closeModal').run());
-      }.bind(this), fileJson);
-    } else {
-      //
-      this.cronapi.util.throwException(this.cronapi.util.createException('Erro ao ler a planilha com as saídas atualizados.'));
-    }
-   } catch (e_exception) {
-        e = e_exception;
-     //
-    this.cronapi.util.throwException(e);
-   }
+      } else {
+        //
+        this.cronapi.screen.notify('error',this.cronapi.json.getProperty(serverResponse, 'message'));
+      }
+    }.bind(this), fileJson);
+  }
 }
 
 /**
@@ -49,12 +47,12 @@ window.blockly.js.blockly.productExit.UploadSheet.readAndConvert = async functio
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:22:16
+ * @since 27/05/2025, 11:08:08
  *
  */
 window.blockly.js.blockly.productExit.UploadSheet.buildFileAsJsonArgs = [];
 window.blockly.js.blockly.productExit.UploadSheet.buildFileAsJson = async function() {
- var fileJson, e, item;
+ var e, fileJson, serverResponse;
   return this.cronapi.json.createObjectFromString(this.cronapi.screen.getValueOfField("vars.excelFileToUpload"));
 }
 
@@ -66,12 +64,12 @@ window.blockly.js.blockly.productExit.UploadSheet.buildFileAsJson = async functi
  * @param fileData
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:22:16
+ * @since 27/05/2025, 11:08:08
  *
  */
 window.blockly.js.blockly.productExit.UploadSheet.validateArgs = [{ description: 'fileData', id: 'b1d364dc' }];
 window.blockly.js.blockly.productExit.UploadSheet.validate = async function(fileData) {
- var fileJson, e;
+ var e, fileJson;
   //
   isValid = true;
   //
@@ -100,12 +98,12 @@ window.blockly.js.blockly.productExit.UploadSheet.validate = async function(file
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:22:16
+ * @since 27/05/2025, 11:08:08
  *
  */
 window.blockly.js.blockly.productExit.UploadSheet.openModalArgs = [];
 window.blockly.js.blockly.productExit.UploadSheet.openModal = async function() {
- var fileJson, e, item;
+ var e, fileJson, serverResponse;
   //
   this.cronapi.screen.changeValueOfField("vars.excelFileToUpload", '');
   //
@@ -119,12 +117,12 @@ window.blockly.js.blockly.productExit.UploadSheet.openModal = async function() {
  *
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:22:16
+ * @since 27/05/2025, 11:08:08
  *
  */
 window.blockly.js.blockly.productExit.UploadSheet.closeModalArgs = [];
 window.blockly.js.blockly.productExit.UploadSheet.closeModal = async function() {
- var fileJson, e, item;
+ var e, fileJson, serverResponse;
   //
   this.cronapi.screen.hideModal("modalUploadSheet");
   //
