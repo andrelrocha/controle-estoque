@@ -15,14 +15,14 @@ public static final int TIMEOUT = 300;
 /**
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 27/05/2025, 09:23:53
+ * @since 27/05/2025, 11:12:26
  *
  */
 public static Var getAll() throws Exception {
  return new Callable<Var>() {
 
-   private Var productExitsList = Var.VAR_NULL;
    private Var e = Var.VAR_NULL;
+   private Var productExitsList = Var.VAR_NULL;
 
    public Var call() throws Exception {
     try {
@@ -44,7 +44,7 @@ public static Var getAll() throws Exception {
  * @param id
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 27/05/2025, 09:23:53
+ * @since 27/05/2025, 11:12:26
  *
  */
 public static Var getById(@ParamMetaData(description = "id2", id = "72383069") @RequestBody(required = false) Var id2) throws Exception {
@@ -73,7 +73,35 @@ public static Var getById(@ParamMetaData(description = "id2", id = "72383069") @
           e = Var.valueOf(e_exception);
          cronapi.util.Operations.throwException(e);
      }
-    return productExit;
+    return
+cronapi.list.Operations.getFirst(productExit);
+   }
+ }.call();
+}
+
+/**
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 27/05/2025, 11:12:26
+ *
+ */
+public static Var getEveryId() throws Exception {
+ return new Callable<Var>() {
+
+   private Var productExitsIdsList = Var.VAR_NULL;
+   private Var e = Var.VAR_NULL;
+
+   public Var call() throws Exception {
+    try {
+         productExitsIdsList =
+        cronapi.database.Operations.query(Var.valueOf("app.entity.ProductExit"),Var.valueOf("select \n	p.id \nfrom \n	ProductExit p"));
+     } catch (Exception e_exception) {
+          e = Var.valueOf(e_exception);
+         cronapi.util.Operations.throwException(
+        cronapi.util.Operations.createException(
+        Var.valueOf("Erro ao obter todos os IDS das saídas no sistema.")));
+     }
+    return productExitsIdsList;
    }
  }.call();
 }
