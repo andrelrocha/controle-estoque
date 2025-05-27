@@ -17,13 +17,46 @@ public static final int TIMEOUT = 300;
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:10:53
+ * @since 27/05/2025, 09:37:46
  *
  */
-public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @RequestBody(required = false) Var data) throws Exception {
+public static Var manageUpdate(@ParamMetaData(description = "data", id = "6bd31f73") @RequestBody(required = false) Var data) throws Exception {
  return new Callable<Var>() {
 
-   private Var productExit = Var.VAR_NULL;
+   private Var e = Var.VAR_NULL;
+   private Var response = Var.VAR_NULL;
+
+   public Var call() throws Exception {
+    try {
+         update(data);
+        response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_TRUE) , Var.valueOf("message",
+        Var.valueOf("Saída atualizada com sucesso no sistema!")));
+     } catch (Exception e_exception) {
+          e = Var.valueOf(e_exception);
+         response =
+        cronapi.map.Operations.createObjectMapWith(Var.valueOf("success",
+        Var.VAR_FALSE) , Var.valueOf("message",
+        cronapi.util.Operations.getExceptionMessage(e)));
+     }
+    return response;
+   }
+ }.call();
+}
+
+/**
+ *
+ * @param data
+ *
+ * @author Andre Lucio Rocha Wanderley
+ * @since 27/05/2025, 09:37:46
+ *
+ */
+public static void update(@ParamMetaData(description = "data", id = "6bd31f73") @RequestBody(required = false) Var data) throws Exception {
+  new Callable<Var>() {
+
+   private Var productExitOnDb = Var.VAR_NULL;
    private Var productId = Var.VAR_NULL;
    private Var productAmount = Var.VAR_NULL;
    private Var newExitAmount = Var.VAR_NULL;
@@ -36,30 +69,24 @@ public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @
     try {
          if (
         Var.valueOf(validateJsonFields(data)).getObjectAsBoolean()) {
-            productExit =
-            cronapi.database.Operations.query(Var.valueOf("app.entity.ProductExit"),Var.valueOf("select \n	p \nfrom \n	ProductExit p  \nwhere \n	p.id = :id"),Var.valueOf("id",
+            productExitOnDb =
+            cronapi.util.Operations.callBlockly(Var.valueOf("blockly.productExit.GetProductExit:getById"), Var.valueOf("72383069",
             cronapi.json.Operations.getJsonOrMapField(data,
             Var.valueOf("id"))));
-            if (
-            cronapi.logic.Operations.isNullOrEmpty(productExit).getObjectAsBoolean()) {
-                cronapi.util.Operations.throwException(
-                cronapi.util.Operations.createException(
-                Var.valueOf("Não foi encontrada uma saída com o id informado.")));
-            }
             productId =
-            cronapi.json.Operations.getJsonOrMapField(
             cronapi.json.Operations.getJsonOrMapField(data,
-            Var.valueOf("product")),
-            Var.valueOf("id"));
+            Var.valueOf("product"));
             productAmount =
-            cronapi.database.Operations.getField(productExit,
-            Var.valueOf("this[0].product.amount"));
+            cronapi.json.Operations.getJsonOrMapField(
+            cronapi.json.Operations.getJsonOrMapField(productExitOnDb,
+            Var.valueOf("product")),
+            Var.valueOf("amount"));
             newExitAmount =
             cronapi.json.Operations.getJsonOrMapField(data,
             Var.valueOf("amount"));
             oldExitAmount =
-            cronapi.database.Operations.getField(productExit,
-            Var.valueOf("this[0].amount"));
+            cronapi.json.Operations.getJsonOrMapField(productExitOnDb,
+            Var.valueOf("amount"));
             amountDifference =
             cronapi.math.Operations.subtract(oldExitAmount,newExitAmount);
             if (
@@ -73,14 +100,14 @@ public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @
             }
             cronapi.util.Operations.callBlockly(Var.valueOf("blockly.product.UpdateProduct:updateAmount"), Var.valueOf("322cf808", productId), Var.valueOf("6e06289c", finalAmount));
             cronapi.database.Operations.execute(Var.valueOf("app.entity.ProductExit"), Var.valueOf("update \n	ProductExit  \nset \n	product = :product, \n	amount = :amount \nwhere \n	id = :id"),Var.valueOf("product",productId),Var.valueOf("amount",newExitAmount),Var.valueOf("id",
-            cronapi.database.Operations.getField(productExit,
+            cronapi.database.Operations.getField(productExitOnDb,
             Var.valueOf("this[0].id"))));
         }
      } catch (Exception e_exception) {
           e = Var.valueOf(e_exception);
          cronapi.util.Operations.throwException(e);
      }
-    return Var.VAR_NULL;
+   return Var.VAR_NULL;
    }
  }.call();
 }
@@ -90,7 +117,7 @@ public static Var update(@ParamMetaData(description = "data", id = "6bd31f73") @
  * @param data
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 20/05/2025, 14:10:53
+ * @since 27/05/2025, 09:37:46
  *
  */
 public static Var validateJsonFields(@ParamMetaData(description = "data", id = "aa7efe5a") @RequestBody(required = false) Var data) throws Exception {
@@ -124,10 +151,8 @@ public static Var validateJsonFields(@ParamMetaData(description = "data", id = "
         Var.valueOf("Foi passado um valor vazio como nova quantidade na atualização de saída.")));
     }
     productId =
-    cronapi.json.Operations.getJsonOrMapField(
     cronapi.json.Operations.getJsonOrMapField(data,
-    Var.valueOf("product")),
-    Var.valueOf("id"));
+    Var.valueOf("product"));
     if (
     cronapi.logic.Operations.isNullOrEmpty(productId).getObjectAsBoolean()) {
         status =

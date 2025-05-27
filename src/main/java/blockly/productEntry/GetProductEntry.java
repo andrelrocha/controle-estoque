@@ -15,7 +15,7 @@ public static final int TIMEOUT = 300;
 /**
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 13:51:15
+ * @since 27/05/2025, 09:23:52
  *
  */
 public static Var getAll() throws Exception {
@@ -44,7 +44,7 @@ public static Var getAll() throws Exception {
  * @param id
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 13:51:15
+ * @since 27/05/2025, 09:23:52
  *
  */
 public static Var getById(@ParamMetaData(description = "id2", id = "257982f0") @RequestBody(required = false) Var id2) throws Exception {
@@ -82,7 +82,7 @@ public static Var getById(@ParamMetaData(description = "id2", id = "257982f0") @
 /**
  *
  * @author Andre Lucio Rocha Wanderley
- * @since 26/05/2025, 13:51:15
+ * @since 27/05/2025, 09:23:52
  *
  */
 public static Var getEveryId() throws Exception {
